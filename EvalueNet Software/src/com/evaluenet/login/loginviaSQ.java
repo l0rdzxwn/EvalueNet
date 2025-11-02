@@ -9,7 +9,7 @@ package com.evaluenet.login;
 import com.evaluenet.admin.Admin;
 import com.evaluenet.hr.HRLANDING;
 import com.evaluenet.it.ITADDACC;
-import EvalueNetPackage.Student;
+
 import com.evaluenet.teacher.TCHLANDING;
 import java.awt.Insets;
 import java.awt.Toolkit;
@@ -251,21 +251,7 @@ public final class loginviaSQ extends javax.swing.JFrame {
                                         reduceAttempt.executeUpdate();
                                         String getName = "SELECT FullName FROM tblaccounts WHERE username = ?";
                                         
-                  if(user.contains("STUD")){
-                    PreparedStatement getStudName = conn.prepareStatement(getName);
-                    getStudName.setString(1, user);
-                    ResultSet findStud = getStudName.executeQuery();
-                    
-                  if(findStud.next()){  
-                    String studName = findStud.getString("FullName");
-                    dispose();
-                    Student s1 = new Student();
-                    s1.studTitle.setText("Welcome, "+studName+"!");
-                    s1.subTitle.setText(studName+"'s PROGRESS REPORT");
-                    s1.setVisible(true);
-                    
-                  }
-                }else if(user.contains("ADMIN")){
+                  if(user.contains("ADMIN")){
                      PreparedStatement getAdminName = conn.prepareStatement(getName);
                     getAdminName.setString(1, user);
                     ResultSet findAdmin = getAdminName.executeQuery();

@@ -29,6 +29,12 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JTextField;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
+import com.formdev.flatlaf.FlatLightLaf;
 
 
 public class login extends javax.swing.JFrame {
@@ -39,7 +45,7 @@ public class login extends javax.swing.JFrame {
         disableCopy(passLP);
         disablePaste(userLP);
         disablePaste(passLP);        
-        
+        convUppercase(userLP);
         //-----------------------
         // DATABASE CALLING
         //-----------------------
@@ -53,7 +59,7 @@ public class login extends javax.swing.JFrame {
         //------------
         // ICON SETUP 
         //------------
-        java.awt.Image img = new ImageIcon(this.getClass().getResource("iconic.png")).getImage();
+        java.awt.Image img = new ImageIcon(this.getClass().getResource("/com/evaluenet/assets/iconic.png")).getImage();
         this.setIconImage(img);
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
     }
@@ -108,11 +114,6 @@ public class login extends javax.swing.JFrame {
 
         userLP.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
         userLP.setToolTipText("");
-        userLP.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                userLPKeyTyped(evt);
-            }
-        });
         getContentPane().add(userLP);
         userLP.setBounds(700, 290, 340, 50);
 
@@ -183,6 +184,26 @@ public class login extends javax.swing.JFrame {
             Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void convUppercase(JTextField textfield) {
+    ((AbstractDocument) textfield.getDocument()).setDocumentFilter(new DocumentFilter() {
+        @Override
+        public void insertString(DocumentFilter.FilterBypass fb, int offset, String string, AttributeSet attr)
+                throws BadLocationException {
+            if (string != null) {
+                super.insertString(fb, offset, string.toUpperCase(), attr);
+            }
+        }
+
+        @Override
+        public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs)
+                throws BadLocationException {
+            if (text != null) {
+                super.replace(fb, offset, length, text.toUpperCase(), attrs);
+            }
+        }
+    });
+}
     
     private void disableCopy(JComponent component){
         component.getInputMap().put(KeyStroke.getKeyStroke("control C"), "none");
@@ -361,22 +382,7 @@ public class login extends javax.swing.JFrame {
                         } 
     }//GEN-LAST:event_formWindowClosing
     
-    //UPPERCASE FUNCTION
-    private void userLPKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_userLPKeyTyped
-        char c = evt.getKeyChar();
-        
-        if (Character.isLowerCase(c)) {
-         if(limit != 0){
-            limit--;
-            JOptionPane.showMessageDialog(this,"Invalid input. All letters must be in uppercase only!");
-             evt.consume();
-        }else if(limit == 0){
-            JOptionPane.showMessageDialog(this,"limit has been reached. Please contact system support");
-                dispose();
-        }
-        }
-    }//GEN-LAST:event_userLPKeyTyped
-    
+   
     //--------------------------------------
     //LOGIN via SECURITY QUESTION FUNCTIONS
     //--------------------------------------
@@ -459,7 +465,8 @@ public class login extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        System.setProperty("flatlaf.useNativeLibrary", "false");
+        FlatLightLaf.setup();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
