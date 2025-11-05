@@ -4,7 +4,6 @@
  */
 package com.evaluenet.it;
 
-import com.evaluenet.login.forgot;
 import com.evaluenet.login.login;
 import javax.swing.JOptionPane;
 

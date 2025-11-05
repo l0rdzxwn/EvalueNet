@@ -92,6 +92,7 @@ public class login extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         sampTxt1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
 
         jPanel4.setBackground(new java.awt.Color(242, 239, 238));
 
@@ -110,7 +111,7 @@ public class login extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(0, 153, 102));
         jLabel3.setText("C.O.D.E.S");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(1020, 640, 70, 20);
+        jLabel3.setBounds(1180, 770, 110, 30);
 
         userLP.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
         userLP.setToolTipText("");
@@ -122,23 +123,24 @@ public class login extends javax.swing.JFrame {
         passLP.setBounds(700, 390, 340, 50);
 
         jLabel5.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 153, 102));
         jLabel5.setText("Password");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(700, 360, 80, 21);
+        jLabel5.setBounds(700, 360, 80, 24);
 
         sampTxt.setFont(new java.awt.Font("Tw Cen MT", 1, 16)); // NOI18N
         sampTxt.setForeground(new java.awt.Color(0, 153, 102));
-        sampTxt.setText("<html><u>Login via Security Question</u></html>");
+        sampTxt.setText("<html><u>Forgot Password?</u></html>");
         sampTxt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 sampTxtMouseClicked(evt);
             }
         });
         getContentPane().add(sampTxt);
-        sampTxt.setBounds(780, 520, 200, 40);
+        sampTxt.setBounds(890, 440, 150, 40);
 
         jButton2.setBackground(new java.awt.Color(0, 153, 102));
-        jButton2.setFont(new java.awt.Font("Tw Cen MT", 1, 24)); // NOI18N
+        jButton2.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("LOGIN");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -147,27 +149,32 @@ public class login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(800, 460, 150, 50);
+        jButton2.setBounds(800, 490, 150, 50);
 
         jLabel4.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 153, 102));
         jLabel4.setText("Username");
         getContentPane().add(jLabel4);
         jLabel4.setBounds(700, 260, 100, 16);
 
         jLabel6.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 153, 102));
-        jLabel6.setText("EvalueNet V1.0");
+        jLabel6.setText("EvalueNet V1.1");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(900, 636, 120, 30);
+        jLabel6.setBounds(1040, 770, 130, 30);
 
         sampTxt1.setFont(new java.awt.Font("Tw Cen MT", 1, 42)); // NOI18N
         sampTxt1.setText("EvalueNet");
         getContentPane().add(sampTxt1);
-        sampTxt1.setBounds(770, 170, 180, 40);
+        sampTxt1.setBounds(770, 170, 210, 40);
         getContentPane().add(jLabel2);
         jLabel2.setBounds(0, 0, 1300, 0);
 
-        setSize(new java.awt.Dimension(1296, 808));
+        jPanel2.setBackground(new java.awt.Color(0, 153, 102));
+        getContentPane().add(jPanel2);
+        jPanel2.setBounds(0, 0, 530, 840);
+
+        setSize(new java.awt.Dimension(1294, 808));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -483,6 +490,7 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPasswordField passLP;

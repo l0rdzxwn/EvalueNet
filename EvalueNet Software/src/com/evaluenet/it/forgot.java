@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.evaluenet.login;
+package com.evaluenet.it;
 
+import com.evaluenet.login.login;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -80,7 +81,7 @@ public class forgot extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Tw Cen MT", 1, 36)); // NOI18N
         jLabel14.setText("Security Question");
         getContentPane().add(jLabel14);
-        jLabel14.setBounds(510, 170, 270, 40);
+        jLabel14.setBounds(470, 170, 310, 47);
 
         ansSQ.setFont(new java.awt.Font("Tw Cen MT", 0, 12)); // NOI18N
         ansSQ.addActionListener(new java.awt.event.ActionListener() {
@@ -108,7 +109,7 @@ public class forgot extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Tw Cen MT", 0, 24)); // NOI18N
         jLabel15.setText("Username");
         getContentPane().add(jLabel15);
-        jLabel15.setBounds(480, 240, 100, 27);
+        jLabel15.setBounds(480, 230, 120, 32);
         getContentPane().add(userField);
         userField.setBounds(520, 270, 260, 40);
 

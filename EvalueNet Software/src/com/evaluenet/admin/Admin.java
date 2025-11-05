@@ -6,7 +6,7 @@ package com.evaluenet.admin;
 
 import com.evaluenet.admin.StudentAdd;
 import com.evaluenet.admin.SubjectAdd;
-import com.evaluenet.login.forgot;
+import com.evaluenet.it.forgot;
 import com.evaluenet.login.login;
 import java.awt.Color;
 import java.awt.Font;

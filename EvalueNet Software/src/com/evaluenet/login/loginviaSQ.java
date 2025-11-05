@@ -94,9 +94,10 @@ public final class loginviaSQ extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         userLbl1 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         jPanel4.setBackground(new java.awt.Color(242, 239, 238));
 
@@ -128,7 +129,7 @@ public final class loginviaSQ extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Tw Cen MT", 1, 42)); // NOI18N
         jLabel14.setText("EvalueNet");
         getContentPane().add(jLabel14);
-        jLabel14.setBounds(780, 170, 190, 40);
+        jLabel14.setBounds(750, 170, 220, 40);
 
         userName.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
         userName.setText("This is your username");
@@ -141,45 +142,52 @@ public final class loginviaSQ extends javax.swing.JFrame {
         sqLabel.setBounds(700, 360, 360, 30);
 
         jLabel8.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 153, 102));
         jLabel8.setText("Answer");
         getContentPane().add(jLabel8);
-        jLabel8.setBounds(700, 400, 140, 21);
+        jLabel8.setBounds(700, 400, 140, 24);
 
         jLabel10.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 153, 102));
         jLabel10.setText("Security Question");
         getContentPane().add(jLabel10);
-        jLabel10.setBounds(700, 330, 140, 21);
+        jLabel10.setBounds(700, 330, 170, 24);
 
         jButton2.setBackground(new java.awt.Color(0, 153, 102));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("LOGIN VIA SECURITY QUESTION");
+        jButton2.setText("LOGIN");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(750, 530, 250, 50);
+        jButton2.setBounds(750, 510, 240, 50);
 
         userLbl1.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
+        userLbl1.setForeground(new java.awt.Color(0, 153, 102));
         userLbl1.setText("Username");
         getContentPane().add(userLbl1);
         userLbl1.setBounds(700, 260, 100, 16);
-
-        jLabel7.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 153, 102));
-        jLabel7.setText("EvalueNet V1.0");
-        getContentPane().add(jLabel7);
-        jLabel7.setBounds(900, 636, 120, 30);
-
-        jLabel4.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 153, 102));
-        jLabel4.setText("C.O.D.E.S");
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(1020, 640, 70, 20);
         getContentPane().add(jLabel2);
         jLabel2.setBounds(0, 0, 1300, 0);
+
+        jPanel2.setBackground(new java.awt.Color(0, 153, 102));
+        getContentPane().add(jPanel2);
+        jPanel2.setBounds(0, 0, 530, 840);
+
+        jLabel3.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 153, 102));
+        jLabel3.setText("C.O.D.E.S");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(1180, 770, 110, 30);
+
+        jLabel6.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 153, 102));
+        jLabel6.setText("EvalueNet V1.1");
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(1040, 770, 130, 30);
 
         setSize(new java.awt.Dimension(1296, 808));
         setLocationRelativeTo(null);
@@ -387,10 +395,11 @@ public void resetAttempts(){
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JLabel sqLabel;
