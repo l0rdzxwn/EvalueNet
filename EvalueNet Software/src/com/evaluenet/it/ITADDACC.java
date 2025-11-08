@@ -4,9 +4,18 @@
  */
 package com.evaluenet.it;
 
+import com.evaluenet.admin.tablesf1;
 import com.evaluenet.login.login;
+import com.mysql.cj.jdbc.result.ResultSetMetaData;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-
+import javax.swing.table.DefaultTableModel;
+import java.sql.Connection;
 /**
  *
  * @author aicel
@@ -19,9 +28,64 @@ public class ITADDACC extends javax.swing.JFrame {
     public ITADDACC(String val) {
         initComponents();
         itVal.setText(val);
+        try {
+            establishConnection();
+        } catch (SQLException ex) {
+            System.getLogger(ITADDACC.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } catch (ClassNotFoundException ex) {
+            System.getLogger(ITADDACC.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
         
+        getItem();
     }
-
+    
+    
+    //-------------------------
+    // VARIABLE INITIALIZATION
+    //-------------------------
+    Connection conn;
+    
+    
+    //-----------------------
+    // ESTABLISHING DATABASE
+    //-----------------------
+    public void establishConnection() throws SQLException, ClassNotFoundException{
+        
+            Class.forName("com.mysql.cj.jdbc.Driver"); //Driver Connection
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/evaluenet","root","gRadingsystemDB2024"); //Database Connection
+        //Checks connection
+            if(conn != null){
+                System.out.println("Connection successfully");
+            }
+    }
+    
+    //-----------------
+    //TABLE FUNCTION/S
+    //-----------------
+    public void getItem(){
+         
+             try {    
+                 PreparedStatement getSec = conn.prepareStatement("SELECT FullName, username, userType FROM tblaccounts ");
+                    
+                    ResultSet findSection = getSec.executeQuery();
+                         ResultSetMetaData getColVal = (ResultSetMetaData) findSection.getMetaData();
+            int q = getColVal.getColumnCount();
+            DefaultTableModel secAssign = (DefaultTableModel) accTable.getModel();
+            secAssign.setRowCount(0);
+            accTable.setDefaultEditor(Object.class, null);
+            while (findSection.next()) {
+                Object[] row = new Object[q];
+                for (int i = 1; i <= q; i++) {
+                    row[i - 1] = findSection.getObject(i); // Get each column value
+                }
+                secAssign.addRow(row); // Add the row to the table model
+            }
+             } catch (SQLException ex) {
+                 Logger.getLogger(tablesf1.class.getName()).log(Level.SEVERE, null, ex);
+             }
+         
+               
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,92 +95,160 @@ public class ITADDACC extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton8 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
-        jButton12 = new javax.swing.JButton();
-        jButton13 = new javax.swing.JButton();
-        itVal = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        manageAccBtn = new javax.swing.JButton();
+        resetLimitBtn = new javax.swing.JButton();
+        sqBtn = new javax.swing.JButton();
+        jButton11 = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
+        itVal = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        accTable = new javax.swing.JTable();
+        jPanel6 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        jButton8.setBackground(new java.awt.Color(204, 255, 204));
-        jButton8.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
-        jButton8.setForeground(new java.awt.Color(51, 51, 51));
-        jButton8.setText("RESET LIMITS");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        jPanel1.setBackground(new java.awt.Color(0, 108, 72));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("IT Dashboard");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 220, 30));
+
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(0, 0, 1280, 70);
+
+        jPanel4.setBackground(new java.awt.Color(0, 153, 102));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        manageAccBtn.setBackground(new java.awt.Color(0, 153, 102));
+        manageAccBtn.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
+        manageAccBtn.setForeground(new java.awt.Color(255, 255, 255));
+        manageAccBtn.setText("MANAGE ACCOUNTS");
+        manageAccBtn.setBorder(null);
+        manageAccBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                manageAccBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton8);
-        jButton8.setBounds(190, 310, 370, 90);
+        jPanel4.add(manageAccBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 192, 270, 90));
 
-        jButton10.setBackground(new java.awt.Color(204, 255, 204));
-        jButton10.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
-        jButton10.setForeground(new java.awt.Color(51, 51, 51));
-        jButton10.setText("LOG OUT");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
+        resetLimitBtn.setBackground(new java.awt.Color(0, 153, 102));
+        resetLimitBtn.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
+        resetLimitBtn.setForeground(new java.awt.Color(255, 255, 255));
+        resetLimitBtn.setText("RESET LIMITS");
+        resetLimitBtn.setBorder(null);
+        resetLimitBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
+                resetLimitBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton10);
-        jButton10.setBounds(1100, 50, 110, 40);
+        jPanel4.add(resetLimitBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 288, 270, 87));
 
-        jButton11.setBackground(new java.awt.Color(204, 255, 204));
+        sqBtn.setBackground(new java.awt.Color(0, 153, 102));
+        sqBtn.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
+        sqBtn.setForeground(new java.awt.Color(255, 255, 255));
+        sqBtn.setText("ADD SECURITY QUESTION");
+        sqBtn.setBorder(null);
+        sqBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sqBtnActionPerformed(evt);
+            }
+        });
+        jPanel4.add(sqBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 381, 270, 90));
+
+        jButton11.setBackground(new java.awt.Color(0, 108, 72));
         jButton11.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
-        jButton11.setForeground(new java.awt.Color(51, 51, 51));
-        jButton11.setText("BACK");
+        jButton11.setForeground(new java.awt.Color(255, 255, 255));
+        jButton11.setText("GO BACK");
+        jButton11.setBorder(null);
         jButton11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton11ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton11);
-        jButton11.setBounds(912, 573, 100, 40);
+        jPanel4.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 630, 250, 56));
 
-        jButton12.setBackground(new java.awt.Color(204, 255, 204));
-        jButton12.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
-        jButton12.setForeground(new java.awt.Color(51, 51, 51));
-        jButton12.setText("MANAGE ACCOUNTS");
-        jButton12.addActionListener(new java.awt.event.ActionListener() {
+        jButton10.setBackground(new java.awt.Color(0, 108, 72));
+        jButton10.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
+        jButton10.setForeground(new java.awt.Color(255, 255, 255));
+        jButton10.setText("LOG OUT");
+        jButton10.setBorder(null);
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton12ActionPerformed(evt);
+                jButton10ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton12);
-        jButton12.setBounds(190, 180, 370, 90);
+        jPanel4.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 700, 250, 55));
 
-        jButton13.setBackground(new java.awt.Color(204, 255, 204));
-        jButton13.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
-        jButton13.setForeground(new java.awt.Color(51, 51, 51));
-        jButton13.setText("ADD SECURITY QUESTION");
-        jButton13.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton13ActionPerformed(evt);
+        itVal.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        itVal.setForeground(new java.awt.Color(255, 255, 255));
+        itVal.setText("Lord Zierwin");
+        jPanel4.add(itVal, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 180, 30));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("IT Administrator");
+        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 220, 50));
+
+        jPanel2.setBackground(new java.awt.Color(0, 153, 102));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(242, 242, 242), 2));
+        jPanel4.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 70, 290, 120));
+
+        getContentPane().add(jPanel4);
+        jPanel4.setBounds(0, 0, 270, 800);
+
+        jPanel3.setBackground(new java.awt.Color(0, 153, 102));
+        getContentPane().add(jPanel3);
+        jPanel3.setBounds(330, 120, 270, 100);
+
+        jPanel5.setBackground(new java.awt.Color(0, 153, 102));
+        getContentPane().add(jPanel5);
+        jPanel5.setBounds(330, 240, 220, 430);
+
+        accTable.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        accTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Name", "Username", "User Type"
             }
-        });
-        getContentPane().add(jButton13);
-        jButton13.setBounds(710, 180, 370, 90);
+        ));
+        jScrollPane1.setViewportView(accTable);
 
-        itVal.setText("ITName");
-        getContentPane().add(itVal);
-        itVal.setBounds(190, 60, 180, 16);
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(570, 240, 650, 430);
 
-        jLabel3.setText("Welcome,");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(127, 60, 70, 16);
+        jPanel6.setBackground(new java.awt.Color(0, 153, 102));
+        getContentPane().add(jPanel6);
+        jPanel6.setBounds(620, 120, 300, 100);
+
+        jPanel7.setBackground(new java.awt.Color(0, 153, 102));
+        getContentPane().add(jPanel7);
+        jPanel7.setBounds(940, 120, 280, 100);
 
         setSize(new java.awt.Dimension(1294, 807));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void resetLimitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetLimitBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_resetLimitBtnActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
    login l1 = new login();
@@ -132,17 +264,17 @@ public class ITADDACC extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton11ActionPerformed
 
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-       ITADDACCFORM iaf = new ITADDACCFORM(itVal.getText());
-        this.dispose();
-            iaf.setVisible(true);
-    }//GEN-LAST:event_jButton12ActionPerformed
-
-    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+    private void sqBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sqBtnActionPerformed
         forgot f1 = new forgot();
                 f1.setVisible(true);
                 this.setVisible(false);
-    }//GEN-LAST:event_jButton13ActionPerformed
+    }//GEN-LAST:event_sqBtnActionPerformed
+
+    private void manageAccBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageAccBtnActionPerformed
+        ITADDACCFORM iaf = new ITADDACCFORM(itVal.getText());
+        this.dispose();
+        iaf.setVisible(true);
+    }//GEN-LAST:event_manageAccBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -187,12 +319,22 @@ public class ITADDACC extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable accTable;
     private javax.swing.JLabel itVal;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton manageAccBtn;
+    private javax.swing.JButton resetLimitBtn;
+    private javax.swing.JButton sqBtn;
     // End of variables declaration//GEN-END:variables
 }
