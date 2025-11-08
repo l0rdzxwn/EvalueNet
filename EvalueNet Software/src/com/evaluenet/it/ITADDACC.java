@@ -3,10 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.evaluenet.it;
-
+import com.formdev.flatlaf.FlatLightLaf;
 import com.evaluenet.admin.tablesf1;
 import com.evaluenet.login.login;
 import com.mysql.cj.jdbc.result.ResultSetMetaData;
+import java.awt.Font;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,10 +17,13 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.sql.Connection;
-/**
- *
- * @author aicel
- */
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.table.JTableHeader;
+
+
 public class ITADDACC extends javax.swing.JFrame {
 
     /**
@@ -35,8 +39,17 @@ public class ITADDACC extends javax.swing.JFrame {
         } catch (ClassNotFoundException ex) {
             System.getLogger(ITADDACC.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
+        //------------
+        // ICON SETUP 
+        //------------
+        java.awt.Image img = new ImageIcon(this.getClass().getResource("/com/evaluenet/assets/iconic.png")).getImage();
+        this.setIconImage(img);
         
         getItem();
+        getAnalytics("Teacher",numTch);
+        getAnalytics("Admin",numAdm);
+        getAnalytics("HR",numHR);
+        styleHeader(accTable);
     }
     
     
@@ -52,16 +65,16 @@ public class ITADDACC extends javax.swing.JFrame {
     public void establishConnection() throws SQLException, ClassNotFoundException{
         
             Class.forName("com.mysql.cj.jdbc.Driver"); //Driver Connection
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/evaluenet","root","gRadingsystemDB2024"); //Database Connection
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/evaluenet","devuser",""); //Database Connection
         //Checks connection
             if(conn != null){
                 System.out.println("Connection successfully");
             }
     }
     
-    //-----------------
-    //TABLE FUNCTION/S
-    //-----------------
+    //------------------
+    // TABLE FUNCTION/S
+    //------------------
     public void getItem(){
          
              try {    
@@ -86,6 +99,30 @@ public class ITADDACC extends javax.swing.JFrame {
          
                
     }
+    
+    public void styleHeader(JTable table){
+            JTableHeader header = table.getTableHeader();
+            header.setFont(new Font("Poppins Medium", Font.PLAIN, 12));   
+    }
+    
+    //---------------------
+    // ANALYTICS FUCNTION/S
+    //---------------------
+    public void getAnalytics(String userType, JLabel label){
+        try {
+            PreparedStatement getNum = conn.prepareStatement("SELECT COUNT(*) as total_accounts FROM tblaccounts WHERE userType = ? ");
+                getNum.setObject(1,userType);
+            ResultSet numCount = getNum.executeQuery();
+            if(numCount.next()){
+                
+                label.setText(Integer.toString(numCount.getInt("total_accounts")));
+            }
+        } catch (SQLException ex) {
+            System.getLogger(ITADDACC.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -106,12 +143,21 @@ public class ITADDACC extends javax.swing.JFrame {
         itVal = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        numTch = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         accTable = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        numAdm = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        numHR = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -119,10 +165,10 @@ public class ITADDACC extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(0, 108, 72));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Poppins SemiBold", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("IT Dashboard");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 220, 30));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 190, 30));
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 1280, 70);
@@ -131,7 +177,7 @@ public class ITADDACC extends javax.swing.JFrame {
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         manageAccBtn.setBackground(new java.awt.Color(0, 153, 102));
-        manageAccBtn.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
+        manageAccBtn.setFont(new java.awt.Font("Poppins", 0, 18)); // NOI18N
         manageAccBtn.setForeground(new java.awt.Color(255, 255, 255));
         manageAccBtn.setText("MANAGE ACCOUNTS");
         manageAccBtn.setBorder(null);
@@ -143,7 +189,7 @@ public class ITADDACC extends javax.swing.JFrame {
         jPanel4.add(manageAccBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 192, 270, 90));
 
         resetLimitBtn.setBackground(new java.awt.Color(0, 153, 102));
-        resetLimitBtn.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
+        resetLimitBtn.setFont(new java.awt.Font("Poppins", 0, 18)); // NOI18N
         resetLimitBtn.setForeground(new java.awt.Color(255, 255, 255));
         resetLimitBtn.setText("RESET LIMITS");
         resetLimitBtn.setBorder(null);
@@ -155,7 +201,7 @@ public class ITADDACC extends javax.swing.JFrame {
         jPanel4.add(resetLimitBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 288, 270, 87));
 
         sqBtn.setBackground(new java.awt.Color(0, 153, 102));
-        sqBtn.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
+        sqBtn.setFont(new java.awt.Font("Poppins", 0, 18)); // NOI18N
         sqBtn.setForeground(new java.awt.Color(255, 255, 255));
         sqBtn.setText("ADD SECURITY QUESTION");
         sqBtn.setBorder(null);
@@ -167,7 +213,7 @@ public class ITADDACC extends javax.swing.JFrame {
         jPanel4.add(sqBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 381, 270, 90));
 
         jButton11.setBackground(new java.awt.Color(0, 108, 72));
-        jButton11.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
+        jButton11.setFont(new java.awt.Font("Poppins Medium", 1, 18)); // NOI18N
         jButton11.setForeground(new java.awt.Color(255, 255, 255));
         jButton11.setText("GO BACK");
         jButton11.setBorder(null);
@@ -179,7 +225,7 @@ public class ITADDACC extends javax.swing.JFrame {
         jPanel4.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 630, 250, 56));
 
         jButton10.setBackground(new java.awt.Color(0, 108, 72));
-        jButton10.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
+        jButton10.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
         jButton10.setForeground(new java.awt.Color(255, 255, 255));
         jButton10.setText("LOG OUT");
         jButton10.setBorder(null);
@@ -190,32 +236,90 @@ public class ITADDACC extends javax.swing.JFrame {
         });
         jPanel4.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 700, 250, 55));
 
-        itVal.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        itVal.setFont(new java.awt.Font("Poppins Medium", 0, 18)); // NOI18N
         itVal.setForeground(new java.awt.Color(255, 255, 255));
-        itVal.setText("Lord Zierwin");
-        jPanel4.add(itVal, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 180, 30));
+        itVal.setText("LORD ZIERWIN");
+        jPanel4.add(itVal, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 200, 30));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Poppins ExtraBold", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("IT Administrator");
-        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 220, 50));
+        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 240, 30));
 
         jPanel2.setBackground(new java.awt.Color(0, 153, 102));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(242, 242, 242), 2));
         jPanel4.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 70, 290, 120));
 
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("IT Administrator");
+        jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 220, 30));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("IT Administrator");
+        jPanel4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 220, 30));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("IT Administrator");
+        jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 220, 30));
+
         getContentPane().add(jPanel4);
         jPanel4.setBounds(0, 0, 270, 800);
 
         jPanel3.setBackground(new java.awt.Color(0, 153, 102));
+
+        jLabel1.setFont(new java.awt.Font("Poppins Medium", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Teacher Accounts");
+
+        numTch.setFont(new java.awt.Font("Poppins Medium", 1, 28)); // NOI18N
+        numTch.setForeground(new java.awt.Color(255, 255, 255));
+        numTch.setText("34");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(numTch))
+                .addGap(87, 87, 87))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(5, 5, 5)
+                .addComponent(numTch)
+                .addContainerGap())
+        );
+
         getContentPane().add(jPanel3);
         jPanel3.setBounds(330, 120, 270, 100);
 
         jPanel5.setBackground(new java.awt.Color(0, 153, 102));
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 220, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 430, Short.MAX_VALUE)
+        );
+
         getContentPane().add(jPanel5);
         jPanel5.setBounds(330, 240, 220, 430);
 
-        accTable.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        accTable.setAutoCreateRowSorter(true);
+        accTable.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
         accTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -235,20 +339,76 @@ public class ITADDACC extends javax.swing.JFrame {
         jScrollPane1.setBounds(570, 240, 650, 430);
 
         jPanel6.setBackground(new java.awt.Color(0, 153, 102));
+
+        jLabel2.setFont(new java.awt.Font("Poppins Medium", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Admin Accounts");
+
+        numAdm.setFont(new java.awt.Font("Poppins Medium", 1, 28)); // NOI18N
+        numAdm.setForeground(new java.awt.Color(255, 255, 255));
+        numAdm.setText("45");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(numAdm))
+                .addGap(154, 154, 154))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(numAdm)
+                .addContainerGap())
+        );
+
         getContentPane().add(jPanel6);
         jPanel6.setBounds(620, 120, 300, 100);
 
         jPanel7.setBackground(new java.awt.Color(0, 153, 102));
+
+        jLabel8.setFont(new java.awt.Font("Poppins Medium", 0, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("HR Accounts");
+
+        numHR.setFont(new java.awt.Font("Poppins Medium", 1, 28)); // NOI18N
+        numHR.setForeground(new java.awt.Color(255, 255, 255));
+        numHR.setText("65");
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addComponent(numHR))
+                .addContainerGap())
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(8, 8, 8)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(numHR)
+                .addContainerGap())
+        );
+
         getContentPane().add(jPanel7);
         jPanel7.setBounds(940, 120, 280, 100);
 
         setSize(new java.awt.Dimension(1294, 807));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void resetLimitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetLimitBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_resetLimitBtnActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
    login l1 = new login();
@@ -275,6 +435,10 @@ public class ITADDACC extends javax.swing.JFrame {
         this.dispose();
         iaf.setVisible(true);
     }//GEN-LAST:event_manageAccBtnActionPerformed
+
+    private void resetLimitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetLimitBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_resetLimitBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -309,7 +473,8 @@ public class ITADDACC extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(ITADDACC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        System.setProperty("flatlaf.useNativeLibrary", "false");
+        FlatLightLaf.setup();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -323,8 +488,14 @@ public class ITADDACC extends javax.swing.JFrame {
     private javax.swing.JLabel itVal;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -334,6 +505,9 @@ public class ITADDACC extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton manageAccBtn;
+    private javax.swing.JLabel numAdm;
+    private javax.swing.JLabel numHR;
+    private javax.swing.JLabel numTch;
     private javax.swing.JButton resetLimitBtn;
     private javax.swing.JButton sqBtn;
     // End of variables declaration//GEN-END:variables

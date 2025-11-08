@@ -440,7 +440,7 @@ public class login extends javax.swing.JFrame {
     public void establishConnection() throws SQLException, ClassNotFoundException{
         
             Class.forName("com.mysql.cj.jdbc.Driver"); //Driver Connection
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/evaluenet","root","gRadingsystemDB2024"); //Database Connection
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/evaluenet","devuser",""); //Database Connection
         //Checks connection
             if(conn != null){
                 System.out.println("Connection successfully");

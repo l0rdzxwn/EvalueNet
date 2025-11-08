@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.evaluenet.it;
-
 import com.evaluenet.teacher.TCHLANDING;
 import com.evaluenet.admin.SubjectForm;
 import com.evaluenet.admin.tablesf1;
@@ -15,16 +14,13 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.regex.Pattern;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
-/**
- *
- * @author aicel
- */
+
+
 public class ITADDACCFORM extends javax.swing.JFrame {
 
     /**
@@ -84,7 +80,6 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
         accTable = new javax.swing.JTable();
         ITName = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        namefield = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -92,7 +87,7 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
         jLabel1.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
         jLabel1.setText("LAST NAME:");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(330, 380, 110, 22);
+        jLabel1.setBounds(330, 380, 140, 22);
 
         jLabel6.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
         jLabel6.setText("PASSWORD:");
@@ -196,7 +191,7 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
         jLabel3.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
         jLabel3.setText(" FIRST NAME:");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(50, 380, 110, 22);
+        jLabel3.setBounds(50, 380, 140, 22);
 
         jLabel7.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
         jLabel7.setText("SELECT ACCOUNT TYPE: ");
@@ -251,10 +246,6 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
         jLabel9.setText("Welcome,");
         getContentPane().add(jLabel9);
         jLabel9.setBounds(150, 60, 60, 16);
-
-        namefield.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EvalueNetPackage/2.jpg"))); // NOI18N
-        getContentPane().add(namefield);
-        namefield.setBounds(0, 0, 1330, 800);
 
         setSize(new java.awt.Dimension(1294, 807));
         setLocationRelativeTo(null);
@@ -470,7 +461,7 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
     
     public void connectDB() throws ClassNotFoundException, SQLException{
         Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/evaluenet","root","gRadingsystemDB2024"); 
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/evaluenet","devuser",""); 
                 if(conn != null){
                     System.out.println("Connectionn success");
                 }
@@ -536,7 +527,6 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField lName;
-    private javax.swing.JLabel namefield;
     private javax.swing.JTextField passbox;
     private javax.swing.JComboBox<String> tchName;
     private javax.swing.JTextField uName;
