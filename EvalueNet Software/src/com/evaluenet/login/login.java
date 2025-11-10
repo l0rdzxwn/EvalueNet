@@ -35,6 +35,7 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
 import com.formdev.flatlaf.FlatLightLaf;
+import io.github.cdimascio.dotenv.Dotenv;
 
 
 public class login extends javax.swing.JFrame {
@@ -440,7 +441,8 @@ public class login extends javax.swing.JFrame {
     public void establishConnection() throws SQLException, ClassNotFoundException{
         
             Class.forName("com.mysql.cj.jdbc.Driver"); //Driver Connection
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/evaluenet","devuser",""); //Database Connection
+            Dotenv dotenv = Dotenv.configure().directory("./com/evaluenet/database").filename("dbaccess.env").load();
+            conn = DriverManager.getConnection(dotenv.get("DB_URL"),dotenv.get("DB_USER"),dotenv.get("DB_PASSWORD")); //Database Connection
         //Checks connection
             if(conn != null){
                 System.out.println("Connection successfully");

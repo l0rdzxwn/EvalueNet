@@ -11,6 +11,7 @@ import com.evaluenet.hr.HRLANDING;
 import com.evaluenet.it.ITADDACC;
 
 import com.evaluenet.teacher.TCHLANDING;
+import io.github.cdimascio.dotenv.Dotenv;
 import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -343,7 +344,8 @@ public void resetAttempts(){
     public void establishConnection() throws SQLException, ClassNotFoundException{
         
             Class.forName("com.mysql.cj.jdbc.Driver"); //Driver Connection
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/evaluenet","root","gRadingsystemDB2024"); //Database Connection
+            Dotenv dotenv = Dotenv.configure().directory("./com/evaluenet/database").filename("dbaccess.env").load();
+            conn = DriverManager.getConnection(dotenv.get("DB_URL"),dotenv.get("DB_USER"),dotenv.get("DB_PASSWORD")); //Database Connection
         //Checks connection
             if(conn != null){
                 System.out.println("Connection successfully");

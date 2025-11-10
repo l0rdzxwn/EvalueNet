@@ -66,7 +66,7 @@ public class ITADDACC extends javax.swing.JFrame {
     public void establishConnection() throws SQLException, ClassNotFoundException{
         
             Class.forName("com.mysql.cj.jdbc.Driver"); //Driver Connection
-            Dotenv dotenv = Dotenv.configure().directory("./main").filename("/main/dbaccess.env").load();
+            Dotenv dotenv = Dotenv.configure().directory("./com/evaluenet/database").filename("dbaccess.env").load();
             conn = DriverManager.getConnection(dotenv.get("DB_URL"),dotenv.get("DB_USER"),dotenv.get("DB_PASSWORD")); //Database Connection
         //Checks connection
             if(conn != null){

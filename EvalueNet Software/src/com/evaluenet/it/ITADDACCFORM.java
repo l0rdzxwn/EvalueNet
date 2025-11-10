@@ -7,7 +7,9 @@ import com.evaluenet.teacher.TCHLANDING;
 import com.evaluenet.admin.SubjectForm;
 import com.evaluenet.admin.tablesf1;
 import com.evaluenet.login.login;
+import com.formdev.flatlaf.FlatLightLaf;
 import com.mysql.cj.jdbc.result.ResultSetMetaData;
+import io.github.cdimascio.dotenv.Dotenv;
 import javax.swing.JOptionPane;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,6 +20,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.regex.Pattern;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -38,6 +41,8 @@ public class ITADDACCFORM extends javax.swing.JFrame {
             Logger.getLogger(ITADDACCFORM.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        java.awt.Image img = new ImageIcon(this.getClass().getResource("/com/evaluenet/assets/iconic.png")).getImage();
+        this.setIconImage(img);
         
         fName.setEnabled(false);
         lName.setEnabled(false);
@@ -63,23 +68,35 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         passbox = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
         button = new javax.swing.JButton();
         USERNAME = new javax.swing.JComboBox<>();
-        userVal = new javax.swing.JLabel();
         lName = new javax.swing.JTextField();
         fName = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         tchName = new javax.swing.JComboBox<>();
         uName = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jButton11 = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
+        ITName = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         accTable = new javax.swing.JTable();
-        ITName = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        button1 = new javax.swing.JButton();
+        jLabel17 = new javax.swing.JLabel();
+        uName1 = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -87,33 +104,16 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
         jLabel1.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
         jLabel1.setText("LAST NAME:");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(330, 380, 140, 22);
+        jLabel1.setBounds(570, 230, 140, 22);
 
         jLabel6.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
         jLabel6.setText("PASSWORD:");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(60, 580, 140, 16);
+        jLabel6.setBounds(290, 410, 140, 16);
 
         passbox.setBackground(new java.awt.Color(204, 204, 204));
-        passbox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passboxActionPerformed(evt);
-            }
-        });
         getContentPane().add(passbox);
-        passbox.setBounds(60, 610, 490, 40);
-
-        jButton1.setBackground(new java.awt.Color(204, 255, 204));
-        jButton1.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(51, 51, 51));
-        jButton1.setText("LOG OUT");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(1090, 50, 110, 40);
+        passbox.setBounds(290, 440, 500, 40);
 
         button.setBackground(new java.awt.Color(204, 255, 204));
         button.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
@@ -125,7 +125,7 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
             }
         });
         getContentPane().add(button);
-        button.setBounds(240, 680, 110, 40);
+        button.setBounds(450, 490, 190, 40);
 
         USERNAME.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select account type: ","IT", "HR", "Admin", "Teacher" }));
         USERNAME.addActionListener(new java.awt.event.ActionListener() {
@@ -134,12 +134,7 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
             }
         });
         getContentPane().add(USERNAME);
-        USERNAME.setBounds(50, 320, 250, 40);
-
-        userVal.setFont(new java.awt.Font("Tw Cen MT", 1, 24)); // NOI18N
-        userVal.setText("ACTYPE_");
-        getContentPane().add(userVal);
-        userVal.setBounds(70, 520, 120, 40);
+        USERNAME.setBounds(290, 170, 250, 40);
 
         lName.setBackground(new java.awt.Color(204, 204, 204));
         lName.addActionListener(new java.awt.event.ActionListener() {
@@ -153,7 +148,7 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
             }
         });
         getContentPane().add(lName);
-        lName.setBounds(330, 410, 220, 40);
+        lName.setBounds(570, 260, 220, 40);
 
         fName.setBackground(new java.awt.Color(204, 204, 204));
         fName.addActionListener(new java.awt.event.ActionListener() {
@@ -170,33 +165,27 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
             }
         });
         getContentPane().add(fName);
-        fName.setBounds(50, 410, 250, 40);
+        fName.setBounds(290, 260, 250, 40);
 
         jLabel2.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
         jLabel2.setText("FOR TEACHER ACCOUNT: ");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(330, 290, 220, 22);
-
-        jLabel4.setFont(new java.awt.Font("Tw Cen MT", 1, 36)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(28, 68, 45));
-        jLabel4.setText("ADD ACCOUNT");
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(180, 230, 270, 40);
+        jLabel2.setBounds(570, 140, 220, 22);
 
         jLabel5.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
         jLabel5.setText("USERNAME:");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(60, 480, 140, 22);
+        jLabel5.setBounds(290, 310, 140, 22);
 
         jLabel3.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
         jLabel3.setText(" FIRST NAME:");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(50, 380, 140, 22);
+        jLabel3.setBounds(290, 230, 140, 22);
 
         jLabel7.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
         jLabel7.setText("SELECT ACCOUNT TYPE: ");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(50, 290, 220, 22);
+        jLabel7.setBounds(290, 140, 220, 22);
 
         tchName.setModel(tcModel);
         tchName.addActionListener(new java.awt.event.ActionListener() {
@@ -205,7 +194,7 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
             }
         });
         getContentPane().add(tchName);
-        tchName.setBounds(330, 320, 220, 40);
+        tchName.setBounds(570, 170, 220, 40);
 
         uName.setBackground(new java.awt.Color(204, 204, 204));
         uName.addActionListener(new java.awt.event.ActionListener() {
@@ -219,7 +208,85 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
             }
         });
         getContentPane().add(uName);
-        uName.setBounds(210, 520, 250, 40);
+        uName.setBounds(290, 350, 500, 40);
+        getContentPane().add(jLabel9);
+        jLabel9.setBounds(150, 60, 60, 0);
+
+        jPanel1.setBackground(new java.awt.Color(0, 108, 72));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel13.setFont(new java.awt.Font("Poppins SemiBold", 1, 24)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("IT Dashboard");
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 190, 30));
+
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(0, 0, 1280, 70);
+
+        jPanel4.setBackground(new java.awt.Color(0, 153, 102));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton11.setBackground(new java.awt.Color(0, 108, 72));
+        jButton11.setFont(new java.awt.Font("Poppins Medium", 1, 18)); // NOI18N
+        jButton11.setForeground(new java.awt.Color(255, 255, 255));
+        jButton11.setText("GO BACK");
+        jButton11.setBorder(null);
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 610, 250, 56));
+
+        jButton10.setBackground(new java.awt.Color(0, 108, 72));
+        jButton10.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
+        jButton10.setForeground(new java.awt.Color(255, 255, 255));
+        jButton10.setText("LOG OUT");
+        jButton10.setBorder(null);
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 680, 250, 55));
+
+        ITName.setFont(new java.awt.Font("Poppins Medium", 0, 18)); // NOI18N
+        ITName.setForeground(new java.awt.Color(255, 255, 255));
+        ITName.setText("LORD ZIERWIN");
+        jPanel4.add(ITName, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 200, 30));
+
+        jLabel8.setFont(new java.awt.Font("Poppins ExtraBold", 1, 24)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("IT Administrator");
+        jPanel4.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 240, 30));
+
+        jPanel2.setBackground(new java.awt.Color(0, 153, 102));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(242, 242, 242), 2));
+        jPanel4.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 70, 290, 120));
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("IT Administrator");
+        jPanel4.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 220, 30));
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("IT Administrator");
+        jPanel4.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 220, 30));
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("IT Administrator");
+        jPanel4.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 220, 30));
+
+        getContentPane().add(jPanel4);
+        jPanel4.setBounds(0, 0, 270, 800);
+
+        jLabel4.setFont(new java.awt.Font("Tw Cen MT", 1, 36)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(28, 68, 45));
+        jLabel4.setText("ADD ACCOUNT");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(410, 90, 270, 40);
 
         accTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -237,23 +304,48 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
         jScrollPane1.setViewportView(accTable);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(600, 250, 660, 380);
+        jScrollPane1.setBounds(300, 550, 950, 200);
 
-        ITName.setText("ITName");
-        getContentPane().add(ITName);
-        ITName.setBounds(210, 60, 180, 16);
+        button1.setBackground(new java.awt.Color(204, 255, 204));
+        button1.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
+        button1.setForeground(new java.awt.Color(51, 51, 51));
+        button1.setText("REMOVE");
+        button1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button1);
+        button1.setBounds(960, 230, 170, 40);
 
-        jLabel9.setText("Welcome,");
-        getContentPane().add(jLabel9);
-        jLabel9.setBounds(150, 60, 60, 16);
+        jLabel17.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
+        jLabel17.setText("USERNAME:");
+        getContentPane().add(jLabel17);
+        jLabel17.setBounds(860, 140, 140, 22);
 
-        setSize(new java.awt.Dimension(1294, 807));
+        uName1.setBackground(new java.awt.Color(204, 204, 204));
+        uName1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uName1ActionPerformed(evt);
+            }
+        });
+        uName1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                uName1KeyTyped(evt);
+            }
+        });
+        getContentPane().add(uName1);
+        uName1.setBounds(860, 170, 380, 40);
+
+        jLabel20.setFont(new java.awt.Font("Tw Cen MT", 1, 36)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(28, 68, 45));
+        jLabel20.setText("REMOVE ACCOUNT");
+        getContentPane().add(jLabel20);
+        jLabel20.setBounds(900, 90, 320, 40);
+
+        setSize(new java.awt.Dimension(1294, 810));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void passboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passboxActionPerformed
-       
-    }//GEN-LAST:event_passboxActionPerformed
 
     private void buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonActionPerformed
 
@@ -283,84 +375,6 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
  
     }//GEN-LAST:event_buttonActionPerformed
 
-    
-     public void getItem(){
-         
-             try {    
-                 PreparedStatement getSec = conn.prepareStatement("SELECT FullName, username, userType FROM tblaccounts ");
-                    
-                    ResultSet findSection = getSec.executeQuery();
-                         ResultSetMetaData getColVal = (ResultSetMetaData) findSection.getMetaData();
-            int q = getColVal.getColumnCount();
-            DefaultTableModel secAssign = (DefaultTableModel) accTable.getModel();
-            secAssign.setRowCount(0);
-            accTable.setDefaultEditor(Object.class, null);
-            while (findSection.next()) {
-                Object[] row = new Object[q];
-                for (int i = 1; i <= q; i++) {
-                    row[i - 1] = findSection.getObject(i); // Get each column value
-                }
-                secAssign.addRow(row); // Add the row to the table model
-            }
-             } catch (SQLException ex) {
-                 Logger.getLogger(tablesf1.class.getName()).log(Level.SEVERE, null, ex);
-             }
-         
-               
-    }
-    
-    
-    
-    public void insertAcc(){
-        String firstName = fName.getText();
-            char FirstInitial = firstName.charAt(0);
-            String lastName = lName.getText();
-            String accountType = (String) USERNAME.getSelectedItem();
-            String pass = passbox.getText();
-            String uType =(String) USERNAME.getSelectedItem();
-            
-            
-            String fullUsername = userVal.getText() + uName.getText();//IT_JLLONA
-            String fullName = firstName+"\n"+lastName;
-            
-             // Check for special characters
-        boolean hasSpecialChar = Pattern.compile("[!@#$%^&*(),.?\":{}|<>]").matcher(pass).find();
-        // Check for at least one number
-        boolean hasNumber = Pattern.compile("[0-9]").matcher(pass).find();
-        // Check for at least one uppercase letter
-        boolean hasUpperCase = Pattern.compile("[A-Z]").matcher(pass).find();
-                
-            if(pass.length() < 8 || hasSpecialChar == false || hasNumber == false || hasUpperCase == false){
-                JOptionPane.showMessageDialog(null,"Please follow the format");
-           
-            }else{
-            try {
-                PreparedStatement insertAcc = conn.prepareStatement("INSERT INTO tblaccounts(FullName, username, password,userType) VALUES(?,?,?,?)");
-                insertAcc.setString(1,fullName);
-                insertAcc.setString(2,fullUsername);
-                insertAcc.setString(3,pass);
-                insertAcc.setString(4,uType);
-                insertAcc.executeUpdate();
-                
-                JOptionPane.showMessageDialog(null,"You have created a new account: " +fullUsername);
-            } catch (SQLException ex) {
-                Logger.getLogger(ITADDACCFORM.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            }   
-    }
-    
-    
-    
-    
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        login l1 = new login();
-        int answer = JOptionPane.showConfirmDialog(this, "Are you sure you want to log out?","Logout Confirmation", JOptionPane.YES_NO_OPTION);
-            if(answer == JOptionPane.YES_OPTION){
-        dispose();
-        l1.setVisible(true);
-            }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void USERNAMEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_USERNAMEActionPerformed
          String cbVal = (String) USERNAME.getSelectedItem();
         
@@ -372,7 +386,7 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
            tchName.setEnabled(true);
            fName.setEnabled(false);
           lName.setEnabled(false);
-           userVal.setText("TCH" + "_");
+           
            
        }else if(cbVal.equals("Select account type: ")){ 
            fName.setEnabled(false);
@@ -381,12 +395,12 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
           fName.setEnabled(true);
           lName.setEnabled(true);
           tchName.setEnabled(false);
-          userVal.setText("ADMIN" + "_");
+          
         }else{
           fName.setEnabled(true);
           lName.setEnabled(true);
           tchName.setEnabled(false);
-          userVal.setText(cbVal + "_");
+         
         }
     }//GEN-LAST:event_USERNAMEActionPerformed
 
@@ -436,7 +450,96 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
         }
     }//GEN-LAST:event_uNameKeyTyped
 
-     public void getTeachers() {
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        login l1 = new login();
+        int answer = JOptionPane.showConfirmDialog(this, "Are you sure you want to log out?","Logout Confirmation", JOptionPane.YES_NO_OPTION);
+        if(answer == JOptionPane.YES_OPTION){
+            dispose();
+            l1.setVisible(true);
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_button1ActionPerformed
+
+    private void uName1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uName1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_uName1ActionPerformed
+
+    private void uName1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_uName1KeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_uName1KeyTyped
+
+     public void getItem(){
+         
+             try {    
+                 PreparedStatement getSec = conn.prepareStatement("SELECT FullName, username, userType FROM tblaccounts ");
+                    
+                    ResultSet findSection = getSec.executeQuery();
+                         ResultSetMetaData getColVal = (ResultSetMetaData) findSection.getMetaData();
+            int q = getColVal.getColumnCount();
+            DefaultTableModel secAssign = (DefaultTableModel) accTable.getModel();
+            secAssign.setRowCount(0);
+            accTable.setDefaultEditor(Object.class, null);
+            while (findSection.next()) {
+                Object[] row = new Object[q];
+                for (int i = 1; i <= q; i++) {
+                    row[i - 1] = findSection.getObject(i); // Get each column value
+                }
+                secAssign.addRow(row); // Add the row to the table model
+            }
+             } catch (SQLException ex) {
+                 Logger.getLogger(tablesf1.class.getName()).log(Level.SEVERE, null, ex);
+             }
+         
+               
+    }
+    
+    public void insertAcc(){
+        String firstName = fName.getText();
+            char FirstInitial = firstName.charAt(0);
+            String lastName = lName.getText();
+            String accountType = (String) USERNAME.getSelectedItem();
+            String pass = passbox.getText();
+            String uType =(String) USERNAME.getSelectedItem();
+            
+            
+            String fullUsername = userVal.getText() + uName.getText();//IT_JLLONA
+            String fullName = firstName+"\n"+lastName;
+            
+             // Check for special characters
+        boolean hasSpecialChar = Pattern.compile("[!@#$%^&*(),.?\":{}|<>]").matcher(pass).find();
+        // Check for at least one number
+        boolean hasNumber = Pattern.compile("[0-9]").matcher(pass).find();
+        // Check for at least one uppercase letter
+        boolean hasUpperCase = Pattern.compile("[A-Z]").matcher(pass).find();
+                
+            if(pass.length() < 8 || hasSpecialChar == false || hasNumber == false || hasUpperCase == false){
+                JOptionPane.showMessageDialog(null,"Please follow the format");
+           
+            }else{
+            try {
+                PreparedStatement insertAcc = conn.prepareStatement("INSERT INTO tblaccounts(FullName, username, password,userType) VALUES(?,?,?,?)");
+                insertAcc.setString(1,fullName);
+                insertAcc.setString(2,fullUsername);
+                insertAcc.setString(3,pass);
+                insertAcc.setString(4,uType);
+                insertAcc.executeUpdate();
+                
+                JOptionPane.showMessageDialog(null,"You have created a new account: " +fullUsername);
+            } catch (SQLException ex) {
+                Logger.getLogger(ITADDACCFORM.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            }   
+    }
+    
+    public void getTeachers() {
     String getTC = "SELECT NAME FROM tchInfo";
     try {
         PreparedStatement applySQL = conn.prepareStatement(getTC);
@@ -458,13 +561,14 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
     }
 }
     
-    
     public void connectDB() throws ClassNotFoundException, SQLException{
-        Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/evaluenet","devuser",""); 
-                if(conn != null){
-                    System.out.println("Connectionn success");
-                }
+            Class.forName("com.mysql.cj.jdbc.Driver"); //Driver Connection
+            Dotenv dotenv = Dotenv.configure().directory("./com/evaluenet/database").filename("dbaccess.env").load();
+            conn = DriverManager.getConnection(dotenv.get("DB_URL"),dotenv.get("DB_USER"),dotenv.get("DB_PASSWORD")); //Database Connection
+        //Checks connection
+            if(conn != null){
+                System.out.println("Connection successfully");
+            }
     }
     
    
@@ -473,7 +577,7 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
      */
     
     public static void launch(String TCname) {
-        TCHLANDING tl = new TCHLANDING(TCname);
+        ITADDACCFORM tl = new ITADDACCFORM(TCname);
          // Set the sub value if needed
         tl.setVisible(true);
     }
@@ -501,7 +605,8 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
             java.util.logging.Logger.getLogger(ITADDACCFORM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        System.setProperty("flatlaf.useNativeLibrary", "false");
+        FlatLightLaf.setup();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -515,21 +620,33 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
     private javax.swing.JComboBox<String> USERNAME;
     private javax.swing.JTable accTable;
     private javax.swing.JButton button;
+    private javax.swing.JButton button1;
     private javax.swing.JTextField fName;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField lName;
     private javax.swing.JTextField passbox;
     private javax.swing.JComboBox<String> tchName;
     private javax.swing.JTextField uName;
-    private javax.swing.JLabel userVal;
+    private javax.swing.JTextField uName1;
     // End of variables declaration//GEN-END:variables
 }
