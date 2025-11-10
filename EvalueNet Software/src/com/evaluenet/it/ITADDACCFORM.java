@@ -349,29 +349,32 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
 
     private void buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonActionPerformed
 
-        if(!userVal.getText().equals("TCH_")){
+        String userType = (String) USERNAME.getSelectedItem();
+        if(!userType.equals("Teacher")){
             if(fName.getText().equals("")){
                 JOptionPane.showMessageDialog(null,"Please put a first name");
-            
             }else if(lName.getText().equals("")){
                 JOptionPane.showMessageDialog(null,"Please put a last name");
             }else if(uName.getText().equals("")){
                 JOptionPane.showMessageDialog(null,"Please put a username");
-        }else if(passbox.getText().equals("")){
+            }else if(passbox.getText().equals("")){
                 JOptionPane.showMessageDialog(null,"Please put a password");
             }else{
-                insertAcc();
+                String firstName = fName.getText();
+                String lastName = lName.getText();
+                String fullName = firstName+"\n"+lastName;
+                insertAcc(fullName);
             }
-            
         }else if(uName.getText().equals("")){
-                JOptionPane.showMessageDialog(null,"Please put a username");
+            JOptionPane.showMessageDialog(null,"Please put a username");
         }else if(passbox.getText().equals("")){
-                JOptionPane.showMessageDialog(null,"Please put a password");
-            }else{
-                insertAcc();
-            }
+            JOptionPane.showMessageDialog(null,"Please put a password");
+        }else{
+            String tcName = (String) tchName.getSelectedItem();
+            insertAcc(tcName);
+        }
        
-    getItem(); 
+            getItem(); 
  
     }//GEN-LAST:event_buttonActionPerformed
 
@@ -501,17 +504,12 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
                
     }
     
-    public void insertAcc(){
-        String firstName = fName.getText();
-            char FirstInitial = firstName.charAt(0);
-            String lastName = lName.getText();
-            String accountType = (String) USERNAME.getSelectedItem();
-            String pass = passbox.getText();
-            String uType =(String) USERNAME.getSelectedItem();
-            
-            
-            String fullUsername = userVal.getText() + uName.getText();//IT_JLLONA
-            String fullName = firstName+"\n"+lastName;
+    public void insertAcc(String fullName){
+        
+        String pass = passbox.getText();
+        String uType =(String) USERNAME.getSelectedItem(); 
+        String fullUsername = uName.getText();
+       
             
              // Check for special characters
         boolean hasSpecialChar = Pattern.compile("[!@#$%^&*(),.?\":{}|<>]").matcher(pass).find();
@@ -522,20 +520,20 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
                 
             if(pass.length() < 8 || hasSpecialChar == false || hasNumber == false || hasUpperCase == false){
                 JOptionPane.showMessageDialog(null,"Please follow the format");
-           
-            }else{
-            try {
-                PreparedStatement insertAcc = conn.prepareStatement("INSERT INTO tblaccounts(FullName, username, password,userType) VALUES(?,?,?,?)");
-                insertAcc.setString(1,fullName);
-                insertAcc.setString(2,fullUsername);
-                insertAcc.setString(3,pass);
-                insertAcc.setString(4,uType);
-                insertAcc.executeUpdate();
-                
-                JOptionPane.showMessageDialog(null,"You have created a new account: " +fullUsername);
-            } catch (SQLException ex) {
-                Logger.getLogger(ITADDACCFORM.class.getName()).log(Level.SEVERE, null, ex);
             }
+            else{
+                try {
+                    PreparedStatement insertAcc = conn.prepareStatement("INSERT INTO tblaccounts(FullName, username, password,userType) VALUES(?,?,?,?)");
+                    insertAcc.setString(1,fullName);
+                    insertAcc.setString(2,fullUsername);
+                    insertAcc.setString(3,pass);
+                    insertAcc.setString(4,uType);
+                    insertAcc.executeUpdate();
+
+                    JOptionPane.showMessageDialog(null,"You have created a new account: " +fullUsername);
+                }catch (SQLException ex) {
+                    Logger.getLogger(ITADDACCFORM.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }   
     }
     
