@@ -95,7 +95,7 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
         accTable = new javax.swing.JTable();
         button1 = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
-        uName1 = new javax.swing.JTextField();
+        uNameRem = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -115,10 +115,11 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
         getContentPane().add(passbox);
         passbox.setBounds(290, 440, 500, 40);
 
-        button.setBackground(new java.awt.Color(204, 255, 204));
+        button.setBackground(new java.awt.Color(0, 153, 102));
         button.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
-        button.setForeground(new java.awt.Color(51, 51, 51));
+        button.setForeground(new java.awt.Color(255, 255, 255));
         button.setText("SUBMIT");
+        button.setBorder(null);
         button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonActionPerformed(evt);
@@ -306,10 +307,11 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(300, 550, 950, 200);
 
-        button1.setBackground(new java.awt.Color(204, 255, 204));
+        button1.setBackground(new java.awt.Color(0, 153, 102));
         button1.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
-        button1.setForeground(new java.awt.Color(51, 51, 51));
+        button1.setForeground(new java.awt.Color(255, 255, 255));
         button1.setText("REMOVE");
+        button1.setBorder(null);
         button1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button1ActionPerformed(evt);
@@ -323,19 +325,19 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
         getContentPane().add(jLabel17);
         jLabel17.setBounds(860, 140, 140, 22);
 
-        uName1.setBackground(new java.awt.Color(204, 204, 204));
-        uName1.addActionListener(new java.awt.event.ActionListener() {
+        uNameRem.setBackground(new java.awt.Color(204, 204, 204));
+        uNameRem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                uName1ActionPerformed(evt);
+                uNameRemActionPerformed(evt);
             }
         });
-        uName1.addKeyListener(new java.awt.event.KeyAdapter() {
+        uNameRem.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                uName1KeyTyped(evt);
+                uNameRemKeyTyped(evt);
             }
         });
-        getContentPane().add(uName1);
-        uName1.setBounds(860, 170, 380, 40);
+        getContentPane().add(uNameRem);
+        uNameRem.setBounds(860, 170, 380, 40);
 
         jLabel20.setFont(new java.awt.Font("Tw Cen MT", 1, 36)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(28, 68, 45));
@@ -348,7 +350,7 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonActionPerformed
-
+        
         String userType = (String) USERNAME.getSelectedItem();
         if(!userType.equals("Teacher")){
             if(fName.getText().equals("")){
@@ -373,7 +375,6 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
             String tcName = (String) tchName.getSelectedItem();
             insertAcc(tcName);
         }
-       
             getItem(); 
  
     }//GEN-LAST:event_buttonActionPerformed
@@ -468,17 +469,26 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_button1ActionPerformed
 
-    private void uName1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uName1ActionPerformed
+    private void uNameRemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uNameRemActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_uName1ActionPerformed
+    }//GEN-LAST:event_uNameRemActionPerformed
 
-    private void uName1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_uName1KeyTyped
+    private void uNameRemKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_uNameRemKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_uName1KeyTyped
+    }//GEN-LAST:event_uNameRemKeyTyped
 
+    
+    public void removeAcc(){
+        try{
+            
+        }catch(SQLException ex){
+            
+        }
+    }
+    
      public void getItem(){
          
              try {    
@@ -645,6 +655,6 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
     private javax.swing.JTextField passbox;
     private javax.swing.JComboBox<String> tchName;
     private javax.swing.JTextField uName;
-    private javax.swing.JTextField uName1;
+    private javax.swing.JTextField uNameRem;
     // End of variables declaration//GEN-END:variables
 }
