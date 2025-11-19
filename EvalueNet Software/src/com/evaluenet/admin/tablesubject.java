@@ -7,7 +7,7 @@ package com.evaluenet.admin;
 import com.evaluenet.teacher.TCHLANDING;
 import com.evaluenet.admin.Admin;
 import com.evaluenet.admin.SubjectAdd;
-import com.evaluenet.login.login;
+import com.evaluenet.login.LoginUI;
 import com.mysql.cj.jdbc.result.ResultSetMetaData;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -217,7 +217,7 @@ public class tablesubject extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        login l1 = new login();
+        LoginUI l1 = new LoginUI();
         int answer = JOptionPane.showConfirmDialog(this, "Are you sure you want to log out?","Logout Confirmation", JOptionPane.YES_NO_OPTION);
         if(answer == JOptionPane.YES_OPTION){
             dispose();

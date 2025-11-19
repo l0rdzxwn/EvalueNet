@@ -38,22 +38,22 @@ import javax.swing.JFrame;
  *
  * @author PC
  */
-public final class loginviaSQ extends javax.swing.JFrame {
+public final class SecurityQuestionUI extends javax.swing.JFrame {
 
     
     /**
-     * Creates new form login
+     * Creates new form LoginUI
      */
-    public loginviaSQ(String value) {
+    public SecurityQuestionUI(String value) {
         initComponents();      
             userName.setText(value);
             
             try {
                 establishConnection(); //function calling
             } catch (SQLException ex) {
-                Logger.getLogger(loginviaSQ.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(SecurityQuestionUI.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(loginviaSQ.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(SecurityQuestionUI.class.getName()).log(Level.SEVERE, null, ex);
             }
             
             findUser();
@@ -146,13 +146,13 @@ public final class loginviaSQ extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(0, 153, 102));
         jLabel8.setText("Answer");
         getContentPane().add(jLabel8);
-        jLabel8.setBounds(700, 400, 140, 24);
+        jLabel8.setBounds(700, 400, 140, 21);
 
         jLabel10.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 153, 102));
         jLabel10.setText("Security Question");
         getContentPane().add(jLabel10);
-        jLabel10.setBounds(700, 330, 170, 24);
+        jLabel10.setBounds(700, 330, 170, 21);
 
         jButton2.setBackground(new java.awt.Color(0, 153, 102));
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -232,99 +232,13 @@ public final class loginviaSQ extends javax.swing.JFrame {
                         sqLabel.setText(sqVal);
                 }
         } catch (SQLException ex) {
-            Logger.getLogger(loginviaSQ.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SecurityQuestionUI.class.getName()).log(Level.SEVERE, null, ex);
         }
                 
                 
     }
     
-    public void tempAccess(){
-        String user = userName.getText();
-        String sqVal = sqLabel.getText();
-        String answer = ansBox.getText();
-        if(answer.equals("")){
-            JOptionPane.showMessageDialog(null, "Please enter your answer.");
-        }else{
-        try {
-            PreparedStatement verify = conn.prepareStatement("SELECT username, ANS_SQ, SQ_Attempts FROM tblaccounts WHERE username = ?");
-                verify.setString(1, user);
-                ResultSet checkAns = verify.executeQuery();
     
-                    if(checkAns.next()){
-                        String ansVal = checkAns.getString("ANS_SQ");
-                        int limitVal = checkAns.getInt("SQ_Attempts");
-                            if(ansVal.equals(answer)){
-                                if(limit > 0){
-                                    PreparedStatement reduceAttempt = conn.prepareStatement("UPDATE tblaccounts SET SQ_Attempts =  SQ_Attempts - 1 WHERE username = ?");
-                                        reduceAttempt.setString(1, user);
-                                        reduceAttempt.executeUpdate();
-                                        String getName = "SELECT FullName FROM tblaccounts WHERE username = ?";
-                                        
-                  if(user.contains("ADMIN")){
-                     PreparedStatement getAdminName = conn.prepareStatement(getName);
-                    getAdminName.setString(1, user);
-                    ResultSet findAdmin = getAdminName.executeQuery();
-                    
-                    if(findAdmin.next()){
-                        String adminName = findAdmin.getString("FullName");
-                    dispose();
-                    Admin a1 = new Admin(adminName);
-                    resetAttempts();
-                    a1.setVisible(true);
-                    
-                    }
-                }else if(user.contains("TCH")){
-                    PreparedStatement getTCName = conn.prepareStatement(getName);
-                    getTCName.setString(1, user);
-                    ResultSet findTC = getTCName.executeQuery();
-                    
-                    if(findTC.next()){
-                    String TCname = findTC.getString("FullName");
-                    TCHLANDING tl = new TCHLANDING(TCname);
-                    
-                    dispose();
-                    resetAttempts();
-                    tl.setVisible(true);
-                    }
-                }else if(user.contains("IT")){
-                     PreparedStatement getITName = conn.prepareStatement(getName);
-                    getITName.setString(1, user);
-                    ResultSet findIT = getITName.executeQuery();
-                    if(findIT.next()){
-                    dispose();
-                    String ITname = findIT.getString("FullName");
-                    ITADDACC i1 = new ITADDACC(ITname);
-                    
-                   resetAttempts();
-                    i1.setVisible(true);
-                    }
-                }else if(user.contains("HR")){
-                    PreparedStatement getHRName = conn.prepareStatement(getName);
-                    getHRName.setString(1, user);
-                    ResultSet findHR = getHRName.executeQuery();
-                    
-                    if(findHR.next()){
-                    dispose();
-                    
-                    String HRname = findHR.getString("FullName");
-                    HRLANDING h1 = new HRLANDING(HRname);
-                    
-                    resetAttempts();
-                    h1.setVisible(true);
-                    }
-                    }
-                                }else{
-                                    JOptionPane.showMessageDialog(null,"Try another account. You already used all attempt in this username.");
-                                }
-                            }else{
-                                JOptionPane.showMessageDialog(null,"Incorrect answer, Please try again.");
-                            }
-                    }
-        } catch (SQLException ex) {
-            Logger.getLogger(loginviaSQ.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }  
-                }
     
 public void resetAttempts(){
         try {
@@ -335,7 +249,7 @@ public void resetAttempts(){
             
             
         } catch (SQLException ex) {
-            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoginUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -353,7 +267,7 @@ public void resetAttempts(){
     }
 
     public static void launch(String userVal) {
-        loginviaSQ tl = new loginviaSQ(userVal);
+        SecurityQuestionUI tl = new SecurityQuestionUI(userVal);
          // Set the sub value if needed
         tl.setVisible(true);
     }
@@ -372,14 +286,16 @@ public void resetAttempts(){
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(loginviaSQ.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SecurityQuestionUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(loginviaSQ.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SecurityQuestionUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(loginviaSQ.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SecurityQuestionUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(loginviaSQ.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SecurityQuestionUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

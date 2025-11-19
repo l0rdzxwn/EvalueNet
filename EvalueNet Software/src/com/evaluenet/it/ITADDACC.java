@@ -5,7 +5,7 @@
 package com.evaluenet.it;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.evaluenet.admin.tablesf1;
-import com.evaluenet.login.login;
+import com.evaluenet.login.LoginUI;
 import com.mysql.cj.jdbc.result.ResultSetMetaData;
 import java.awt.Font;
 import java.sql.DriverManager;
@@ -95,6 +95,7 @@ public class ITADDACC extends javax.swing.JFrame {
                 }
                 secAssign.addRow(row); // Add the row to the table model
             }
+            getSec.close();
              } catch (SQLException ex) {
                  Logger.getLogger(tablesf1.class.getName()).log(Level.SEVERE, null, ex);
              }
@@ -119,6 +120,7 @@ public class ITADDACC extends javax.swing.JFrame {
                 
                 label.setText(Integer.toString(numCount.getInt("total_accounts")));
             }
+            getNum.close();
         } catch (SQLException ex) {
             System.getLogger(ITADDACC.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
@@ -413,7 +415,7 @@ public class ITADDACC extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-   login l1 = new login();
+   LoginUI l1 = new LoginUI();
         int answer = JOptionPane.showConfirmDialog(this, "Are you sure you want to log out?","Logout Confirmation", JOptionPane.YES_NO_OPTION);
             if(answer == JOptionPane.YES_OPTION){
         dispose();

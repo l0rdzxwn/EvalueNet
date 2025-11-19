@@ -6,7 +6,7 @@ package com.evaluenet.hr;
 
 import com.evaluenet.admin.SubjectForm;
 import com.evaluenet.admin.tablesf1;
-import com.evaluenet.login.login;
+import com.evaluenet.login.LoginUI;
 import javax.swing.JOptionPane;
 import com.mysql.cj.jdbc.result.ResultSetMetaData;
 import java.sql.DriverManager;
@@ -314,7 +314,7 @@ public class HRLANDING extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        login l1 = new login();
+        LoginUI l1 = new LoginUI();
         int answer = JOptionPane.showConfirmDialog(this, "Are you sure you want to log out?","Logout Confirmation", JOptionPane.YES_NO_OPTION);
         if(answer == JOptionPane.YES_OPTION){
             dispose();

@@ -4,7 +4,7 @@
  */
 package com.evaluenet.admin;
 
-import com.evaluenet.login.login;
+import com.evaluenet.login.LoginUI;
 import java.awt.event.KeyEvent;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 import java.sql.ResultSet;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import com.evaluenet.login.login;
+import com.evaluenet.login.LoginUI;
 /**
  *
  * @author lordz
@@ -984,7 +984,7 @@ public class SchoolForm1 extends javax.swing.JFrame {
     }//GEN-LAST:event_LRNKeyPressed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        login l1 = new login();
+        LoginUI l1 = new LoginUI();
         int answer = JOptionPane.showConfirmDialog(this, "Are you sure you want to log out?","Logout Confirmation", JOptionPane.YES_NO_OPTION);
         if(answer == JOptionPane.YES_OPTION){
             dispose();

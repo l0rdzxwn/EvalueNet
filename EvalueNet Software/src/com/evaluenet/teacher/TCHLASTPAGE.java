@@ -9,7 +9,7 @@ import com.evaluenet.assessmentlist.QuizList;
 import com.evaluenet.assessmentlist.PeriodicExamList;
 import com.evaluenet.assessmentlist.SummativeExamList;
 import com.evaluenet.admin.tablestudent;
-import com.evaluenet.login.login;
+import com.evaluenet.login.LoginUI;
 import com.mysql.cj.jdbc.result.ResultSetMetaData;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -380,7 +380,7 @@ public class TCHLASTPAGE extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        login l1 = new login();
+        LoginUI l1 = new LoginUI();
         int answer = JOptionPane.showConfirmDialog(this, "Are you sure you want to log out?","Logout Confirmation", JOptionPane.YES_NO_OPTION);
             if(answer == JOptionPane.YES_OPTION){
         dispose();

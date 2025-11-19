@@ -6,7 +6,7 @@ package com.evaluenet.it;
 import com.evaluenet.teacher.TCHLANDING;
 import com.evaluenet.admin.SubjectForm;
 import com.evaluenet.admin.tablesf1;
-import com.evaluenet.login.login;
+import com.evaluenet.login.LoginUI;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.mysql.cj.jdbc.result.ResultSetMetaData;
 import io.github.cdimascio.dotenv.Dotenv;
@@ -97,6 +97,10 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
         jLabel17 = new javax.swing.JLabel();
         uNameRem = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
+        uNameRes = new javax.swing.JTextField();
+        button2 = new javax.swing.JButton();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -345,6 +349,44 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
         getContentPane().add(jLabel20);
         jLabel20.setBounds(900, 90, 320, 40);
 
+        uNameRes.setBackground(new java.awt.Color(204, 204, 204));
+        uNameRes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uNameResActionPerformed(evt);
+            }
+        });
+        uNameRes.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                uNameResKeyTyped(evt);
+            }
+        });
+        getContentPane().add(uNameRes);
+        uNameRes.setBounds(850, 440, 380, 40);
+
+        button2.setBackground(new java.awt.Color(0, 153, 102));
+        button2.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
+        button2.setForeground(new java.awt.Color(255, 255, 255));
+        button2.setText("RESET LIMIT");
+        button2.setBorder(null);
+        button2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button2);
+        button2.setBounds(960, 490, 170, 40);
+
+        jLabel18.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
+        jLabel18.setText("USERNAME:");
+        getContentPane().add(jLabel18);
+        jLabel18.setBounds(850, 410, 140, 22);
+
+        jLabel21.setFont(new java.awt.Font("Tw Cen MT", 1, 36)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(28, 68, 45));
+        jLabel21.setText("RESET LIMITS");
+        getContentPane().add(jLabel21);
+        jLabel21.setBounds(950, 350, 260, 40);
+
         setSize(new java.awt.Dimension(1294, 810));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -459,7 +501,7 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        login l1 = new login();
+        LoginUI l1 = new LoginUI();
         int answer = JOptionPane.showConfirmDialog(this, "Are you sure you want to log out?","Logout Confirmation", JOptionPane.YES_NO_OPTION);
         if(answer == JOptionPane.YES_OPTION){
             dispose();
@@ -469,7 +511,8 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
-        
+        removeAcc();
+        getItem();
     }//GEN-LAST:event_button1ActionPerformed
 
     private void uNameRemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uNameRemActionPerformed
@@ -480,12 +523,38 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
         // TODO add your handling code here:
     }//GEN-LAST:event_uNameRemKeyTyped
 
+    private void uNameResActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uNameResActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_uNameResActionPerformed
+
+    private void uNameResKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_uNameResKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_uNameResKeyTyped
+
+    private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
+        resetLimit();
+        getItem();
+    }//GEN-LAST:event_button2ActionPerformed
+
+    public void resetLimit(){
+        try{
+            PreparedStatement resetStmt = conn.prepareStatement("UPDATE tblaccounts SET logAttempt = 4 WHERE username = ?");
+            resetStmt.setString(1,uNameRes.getText());
+            resetStmt.executeUpdate();
+        }catch(SQLException ex){
+            Logger.getLogger(tablesf1.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     public void removeAcc(){
         try{
             
+            PreparedStatement remStmt = conn.prepareStatement("DELETE FROM tblaccounts WHERE username = ?");
+            remStmt.setObject(1,uNameRem.getText());
+            remStmt.executeUpdate();
+            JOptionPane.showMessageDialog(null,uNameRem.getText()+" has been successfully removed.");
         }catch(SQLException ex){
-            
+            Logger.getLogger(tablesf1.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -507,6 +576,7 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
                 }
                 secAssign.addRow(row); // Add the row to the table model
             }
+            getSec.close();
              } catch (SQLException ex) {
                  Logger.getLogger(tablesf1.class.getName()).log(Level.SEVERE, null, ex);
              }
@@ -629,6 +699,7 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
     private javax.swing.JTable accTable;
     private javax.swing.JButton button;
     private javax.swing.JButton button1;
+    private javax.swing.JButton button2;
     private javax.swing.JTextField fName;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
@@ -638,8 +709,10 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -656,5 +729,6 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
     private javax.swing.JComboBox<String> tchName;
     private javax.swing.JTextField uName;
     private javax.swing.JTextField uNameRem;
+    private javax.swing.JTextField uNameRes;
     // End of variables declaration//GEN-END:variables
 }

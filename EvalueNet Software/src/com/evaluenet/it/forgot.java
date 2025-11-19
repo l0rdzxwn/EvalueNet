@@ -4,7 +4,7 @@
  */
 package com.evaluenet.it;
 
-import com.evaluenet.login.login;
+import com.evaluenet.login.LoginUI;
 import io.github.cdimascio.dotenv.Dotenv;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -176,7 +176,7 @@ public class forgot extends javax.swing.JFrame {
                         insVal.setString(3,unVal);
                         insVal.executeUpdate();
                         JOptionPane.showMessageDialog(null, "Security Question set successfully");
-                        login log = new login();
+                        LoginUI log = new LoginUI();
                         log.setVisible(true);
                         this.setVisible(false);
                         

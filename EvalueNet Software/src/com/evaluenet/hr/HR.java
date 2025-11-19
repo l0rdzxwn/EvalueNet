@@ -4,7 +4,7 @@
  */
 package com.evaluenet.hr;
 
-import com.evaluenet.login.login;
+import com.evaluenet.login.LoginUI;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -215,7 +215,7 @@ public class HR extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        login l1 = new login();
+        LoginUI l1 = new LoginUI();
         dispose();
         l1.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
