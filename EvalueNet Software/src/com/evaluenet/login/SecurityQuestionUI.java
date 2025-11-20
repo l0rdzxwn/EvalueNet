@@ -46,35 +46,15 @@ public final class SecurityQuestionUI extends javax.swing.JFrame {
      */
     public SecurityQuestionUI(String value) {
         initComponents();      
-            userName.setText(value);
-            
-            try {
-                establishConnection(); //function calling
-            } catch (SQLException ex) {
-                Logger.getLogger(SecurityQuestionUI.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(SecurityQuestionUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            findUser();
-            
-            
-        //Setting the icon    
-        java.awt.Image img = new ImageIcon(this.getClass().getResource("iconic.png")).getImage();
+        userName.setText(value);
+        SecurityQuestionServices.getSqQues(userName, sqLabel);
+        java.awt.Image img = new ImageIcon(this.getClass().getResource("/com/evaluenet/assets/iconic.png")).getImage();
         this.setIconImage(img);
-          
-        
-        
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-            
-       
     }
 //Variable initialization
         private Map<String, String> userDatabase = new HashMap<>();
-    Connection conn;
-    int i = 1;
-   int x = 5;
-   int limit = 4;
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -114,16 +94,6 @@ public final class SecurityQuestionUI extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         ansBox.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
-        ansBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ansBoxActionPerformed(evt);
-            }
-        });
-        ansBox.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                ansBoxKeyPressed(evt);
-            }
-        });
         getContentPane().add(ansBox);
         ansBox.setBounds(700, 440, 340, 50);
 
@@ -193,15 +163,7 @@ public final class SecurityQuestionUI extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(1296, 808));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    
-    
-         
-    
-    private void ansBoxKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ansBoxKeyPressed
-      
-    }//GEN-LAST:event_ansBoxKeyPressed
-        
+     
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
              int closeApp = JOptionPane.showConfirmDialog(this, "Are you sure you want to Exit?", "Exit Confirmation", JOptionPane.YES_NO_OPTION);
                     if(closeApp == JOptionPane.YES_OPTION) {
@@ -209,62 +171,9 @@ public final class SecurityQuestionUI extends javax.swing.JFrame {
                         } 
     }//GEN-LAST:event_formWindowClosing
 
-    private void ansBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ansBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ansBoxActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        tempAccess();
+        SecurityQuestionServices.loginSqAuth(userName, ansBox, this);
     }//GEN-LAST:event_jButton2ActionPerformed
-    
-    public void findUser(){
-        
-        
-        String userVal = userName.getText();
-            System.out.println(userVal);
-        PreparedStatement getUser;
-        try {
-            getUser = conn.prepareStatement("SELECT username, SEC_QUES, ANS_SQ FROM tblaccounts WHERE username = ?");
-                getUser.setString(1,userVal);
-            ResultSet getValues = getUser.executeQuery();
-                if(getValues.next()){
-                    String sqVal = getValues.getString("SEC_QUES");
-                        sqLabel.setText(sqVal);
-                }
-        } catch (SQLException ex) {
-            Logger.getLogger(SecurityQuestionUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-                
-                
-    }
-    
-    
-    
-public void resetAttempts(){
-        try {
-            String user = userName.getText();
-            PreparedStatement getUserAttempt = conn.prepareStatement("UPDATE tblaccounts SET logAttempt = 4 WHERE username = ?");
-                getUserAttempt.setString(1, user);
-                    getUserAttempt.executeUpdate();
-            
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(LoginUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-
-//Connecting Java to SQL server
-    public void establishConnection() throws SQLException, ClassNotFoundException{
-        
-            Class.forName("com.mysql.cj.jdbc.Driver"); //Driver Connection
-            Dotenv dotenv = Dotenv.configure().directory("./com/evaluenet/database").filename("dbaccess.env").load();
-            conn = DriverManager.getConnection(dotenv.get("DB_URL"),dotenv.get("DB_USER"),dotenv.get("DB_PASSWORD")); //Database Connection
-        //Checks connection
-            if(conn != null){
-                System.out.println("Connection successfully");
-            }
-    }
 
     public static void launch(String userVal) {
         SecurityQuestionUI tl = new SecurityQuestionUI(userVal);

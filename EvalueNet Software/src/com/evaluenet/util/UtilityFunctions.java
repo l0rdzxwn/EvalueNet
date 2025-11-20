@@ -31,10 +31,8 @@ public class UtilityFunctions {
     
     public static void closeForm(JFrame frame){
         int closeApp = JOptionPane.showConfirmDialog(frame, "Are you sure you want to Exit?", "Exit Confirmation", JOptionPane.YES_NO_OPTION);
-                    if(closeApp == JOptionPane.YES_OPTION) {
-                            frame.dispose();
-                        } 
+        if(closeApp == JOptionPane.YES_OPTION) {
+            frame.dispose();
+        } 
     }
-    
-    
 }

@@ -170,7 +170,7 @@ public class LoginUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-             UtilityFunctions.closeForm(this);
+        UtilityFunctions.closeForm(this);
     }//GEN-LAST:event_formWindowClosing
    
     private void sampTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sampTxtMouseClicked
