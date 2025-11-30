@@ -32,30 +32,18 @@ public class ITADDACCFORM extends javax.swing.JFrame {
     public ITADDACCFORM(String val) {
         initComponents();
         ITName.setText(val);
-        
-        try {
-            connectDB();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ITADDACCFORM.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ITADDACCFORM.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
         java.awt.Image img = new ImageIcon(this.getClass().getResource("/com/evaluenet/assets/iconic.png")).getImage();
         this.setIconImage(img);
-        
         fName.setEnabled(false);
         lName.setEnabled(false);
         tchName.setEnabled(false);
-        
-        
         tchName.addItem("Select a Teacher: ");
-        getTeachers();
-        getItem();
+        IT.getTeachers();
+        IT.getItem(accTable);
     }
 
-Connection conn;
-DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
+
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -192,7 +180,7 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
         getContentPane().add(jLabel7);
         jLabel7.setBounds(290, 140, 220, 22);
 
-        tchName.setModel(tcModel);
+        tchName.setModel(IT.tcModel);
         tchName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tchNameActionPerformed(evt);
@@ -407,7 +395,7 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
                 String firstName = fName.getText();
                 String lastName = lName.getText();
                 String fullName = firstName+"\n"+lastName;
-                insertAcc(fullName);
+                IT.insertAcc(fullName,passbox,USERNAME,uName);
             }
         }else if(uName.getText().equals("")){
             JOptionPane.showMessageDialog(null,"Please put a username");
@@ -415,9 +403,9 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
             JOptionPane.showMessageDialog(null,"Please put a password");
         }else{
             String tcName = (String) tchName.getSelectedItem();
-            insertAcc(tcName);
+            IT.insertAcc(tcName,passbox,USERNAME,uName);
         }
-            getItem(); 
+            IT.getItem(accTable); 
  
     }//GEN-LAST:event_buttonActionPerformed
 
@@ -497,7 +485,9 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
     }//GEN-LAST:event_uNameKeyTyped
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        // TODO add your handling code here:
+        ITADDACC iac = new ITADDACC(ITName.getText());
+        iac.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
@@ -511,8 +501,8 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
-        removeAcc();
-        getItem();
+        IT.removeAcc(uNameRem);
+        IT.getItem(accTable);
     }//GEN-LAST:event_button1ActionPerformed
 
     private void uNameRemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uNameRemActionPerformed
@@ -532,127 +522,9 @@ DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
     }//GEN-LAST:event_uNameResKeyTyped
 
     private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
-        resetLimit();
-        getItem();
+        IT.resetLimit(uNameRes);
+        IT.getItem(accTable);
     }//GEN-LAST:event_button2ActionPerformed
-
-    public void resetLimit(){
-        try{
-            PreparedStatement resetStmt = conn.prepareStatement("UPDATE tblaccounts SET logAttempt = 4 WHERE username = ?");
-            resetStmt.setString(1,uNameRes.getText());
-            resetStmt.executeUpdate();
-        }catch(SQLException ex){
-            Logger.getLogger(tablesf1.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    public void removeAcc(){
-        try{
-            
-            PreparedStatement remStmt = conn.prepareStatement("DELETE FROM tblaccounts WHERE username = ?");
-            remStmt.setObject(1,uNameRem.getText());
-            remStmt.executeUpdate();
-            JOptionPane.showMessageDialog(null,uNameRem.getText()+" has been successfully removed.");
-        }catch(SQLException ex){
-            Logger.getLogger(tablesf1.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-     public void getItem(){
-         
-             try {    
-                 PreparedStatement getSec = conn.prepareStatement("SELECT FullName, username, userType FROM tblaccounts ");
-                    
-                    ResultSet findSection = getSec.executeQuery();
-                         ResultSetMetaData getColVal = (ResultSetMetaData) findSection.getMetaData();
-            int q = getColVal.getColumnCount();
-            DefaultTableModel secAssign = (DefaultTableModel) accTable.getModel();
-            secAssign.setRowCount(0);
-            accTable.setDefaultEditor(Object.class, null);
-            while (findSection.next()) {
-                Object[] row = new Object[q];
-                for (int i = 1; i <= q; i++) {
-                    row[i - 1] = findSection.getObject(i); // Get each column value
-                }
-                secAssign.addRow(row); // Add the row to the table model
-            }
-            getSec.close();
-             } catch (SQLException ex) {
-                 Logger.getLogger(tablesf1.class.getName()).log(Level.SEVERE, null, ex);
-             }
-         
-               
-    }
-    
-    public void insertAcc(String fullName){
-        
-        String pass = passbox.getText();
-        String uType =(String) USERNAME.getSelectedItem(); 
-        String fullUsername = uName.getText();
-       
-            
-             // Check for special characters
-        boolean hasSpecialChar = Pattern.compile("[!@#$%^&*(),.?\":{}|<>]").matcher(pass).find();
-        // Check for at least one number
-        boolean hasNumber = Pattern.compile("[0-9]").matcher(pass).find();
-        // Check for at least one uppercase letter
-        boolean hasUpperCase = Pattern.compile("[A-Z]").matcher(pass).find();
-                
-            if(pass.length() < 8 || hasSpecialChar == false || hasNumber == false || hasUpperCase == false){
-                JOptionPane.showMessageDialog(null,"Please follow the format");
-            }
-            else{
-                try {
-                    PreparedStatement insertAcc = conn.prepareStatement("INSERT INTO tblaccounts(FullName, username, password,userType) VALUES(?,?,?,?)");
-                    insertAcc.setString(1,fullName);
-                    insertAcc.setString(2,fullUsername);
-                    insertAcc.setString(3,pass);
-                    insertAcc.setString(4,uType);
-                    insertAcc.executeUpdate();
-
-                    JOptionPane.showMessageDialog(null,"You have created a new account: " +fullUsername);
-                }catch (SQLException ex) {
-                    Logger.getLogger(ITADDACCFORM.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }   
-    }
-    
-    public void getTeachers() {
-    String getTC = "SELECT NAME FROM tchInfo";
-    try {
-        PreparedStatement applySQL = conn.prepareStatement(getTC);
-        ResultSet tcVal = applySQL.executeQuery();
-        
-        System.out.println("All Rows:");
-        while(tcVal.next()) {
-            
-            String tcName = tcVal.getString("NAME");
-            System.out.println("FullName: " + tcName);
-            tcModel.addElement(tcName);
-        }
-        
-        applySQL.executeQuery();
-        
-        
-    } catch (SQLException ex) {
-        Logger.getLogger(SubjectForm.class.getName()).log(Level.SEVERE, null, ex);
-    }
-}
-    
-    public void connectDB() throws ClassNotFoundException, SQLException{
-            Class.forName("com.mysql.cj.jdbc.Driver"); //Driver Connection
-            Dotenv dotenv = Dotenv.configure().directory("./com/evaluenet/database").filename("dbaccess.env").load();
-            conn = DriverManager.getConnection(dotenv.get("DB_URL"),dotenv.get("DB_USER"),dotenv.get("DB_PASSWORD")); //Database Connection
-        //Checks connection
-            if(conn != null){
-                System.out.println("Connection successfully");
-            }
-    }
-    
-   
-    /**
-     * @param args the command line arguments
-     */
     
     public static void launch(String TCname) {
         ITADDACCFORM tl = new ITADDACCFORM(TCname);
