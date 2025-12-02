@@ -3,9 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.evaluenet.it;
+import com.evaluenet.services.ITService;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.evaluenet.admin.tablesf1;
 import com.evaluenet.login.LoginUI;
+import com.evaluenet.models.Account;
 import com.mysql.cj.jdbc.result.ResultSetMetaData;
 import java.awt.Font;
 import java.sql.DriverManager;
@@ -23,6 +25,7 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.JTableHeader;
 import io.github.cdimascio.dotenv.Dotenv;
+import java.util.List;
 
 
 public class ITADDACC extends javax.swing.JFrame {
@@ -39,15 +42,35 @@ public class ITADDACC extends javax.swing.JFrame {
         java.awt.Image img = new ImageIcon(this.getClass().getResource("/com/evaluenet/assets/iconic.png")).getImage();
         this.setIconImage(img);
         
-        IT.getItem(accTable);
-        IT.getAnalytics("Teacher",numTch);
-        IT.getAnalytics("Admin",numAdm);
-        IT.getAnalytics("HR",numHR);
+        displayIntoTable();
         styleHeader(accTable);
+        
+        numTch.setText(String.valueOf(service.getTeacherTotal()));
+        numAdm.setText(String.valueOf(service.getAdminTotal()));
+        numHR.setText(String.valueOf(service.getHRTotal()));
     }
+    
+    ITService service = new ITService();
     public void styleHeader(JTable table){
         JTableHeader header = table.getTableHeader();
         header.setFont(new Font("Poppins Medium", Font.PLAIN, 12));   
+    }
+    
+    public void displayIntoTable(){
+        
+        List<Account> accounts = service.getAll();
+        DefaultTableModel secAssign = (DefaultTableModel) accTable.getModel();
+        secAssign.setRowCount(0);
+        accTable.setDefaultEditor(Object.class, null);
+        
+        for(Account acc: accounts){
+            Object[] row = new Object[3];
+            row[0] = acc.getFullname();
+            row[1] = acc.getUsername();
+            row[2] = acc.getType();
+            secAssign.addRow(row);
+        }
+        
     }
    
     @SuppressWarnings("unchecked")
