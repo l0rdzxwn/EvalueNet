@@ -2,11 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.evaluenet.login;
+package com.evaluenet.services;
 import com.evaluenet.login.LoginUI;
 import com.evaluenet.admin.Admin;
 import com.evaluenet.hr.HRLANDING;
 import com.evaluenet.it.ITADDACC;
+import com.evaluenet.login.LoginUI;
+import com.evaluenet.login.SecurityQuestionUI;
 import com.evaluenet.teacher.TCHLANDING;
 import io.github.cdimascio.dotenv.Dotenv;
 import java.sql.PreparedStatement;
@@ -32,32 +34,8 @@ public class LoginService {
     // GLOBAL VARIABLES
     //------------------
     static int limitVal = 0;
-    static Connection conn;
     
-    public static void establishConnection() throws SQLException, ClassNotFoundException{
-            Class.forName("com.mysql.cj.jdbc.Driver"); //Driver Connection
-            Dotenv dotenv = Dotenv.configure().directory("./com/evaluenet/database").filename("dbaccess.env").load();
-            conn = DriverManager.getConnection(dotenv.get("DB_URL"),dotenv.get("DB_USER"),dotenv.get("DB_PASSWORD")); //Database Connection
-        //Checks connection
-            if(conn != null){
-                System.out.println("Connection successfully");
-            }     
-    }
 
-    public static void resetAttempts(JTextField textfield){
-        try {
-            establishConnection();
-            String user = textfield.getText();
-            PreparedStatement getUserAttempt = conn.prepareStatement("UPDATE tblaccounts SET logAttempt = 4 WHERE username = ?");
-                getUserAttempt.setString(1, user);
-                getUserAttempt.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(LoginUI.class.getName()).log(Level.SEVERE, null, ex);
-        }catch(ClassNotFoundException ex){
-            Logger.getLogger(LoginService.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
     public static void loginAuth(JTextField username,JTextField password, JFrame frame){
         if(!username.getText().equals("") && !password.getText().equals("")){
             String user = username.getText().trim();

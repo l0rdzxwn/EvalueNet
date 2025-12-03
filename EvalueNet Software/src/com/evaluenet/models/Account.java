@@ -19,6 +19,11 @@ public class Account {
         this.userType = userType;
     }
     
+    public Account(String username, String password){
+        this.username = username;
+        this.password = password;
+    }
+    
     public String getFullname(){ return name; }
     public String getUsername(){ return username; }
     public String getPassword(){ return password; }

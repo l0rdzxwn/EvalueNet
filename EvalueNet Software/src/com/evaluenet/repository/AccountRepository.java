@@ -109,4 +109,77 @@ public class AccountRepository {
         return total;
     }
     
+    public int getAttemptByUsername(String username){
+        int numAttempt = 0;
+        try{
+            Connection conn = DatabaseService.establishConnection();
+            PreparedStatement getNum = conn.prepareStatement("SELECT logAttempt FROM tblaccounts WHERE username = ? ");
+            getNum.setObject(1,username);
+            ResultSet check = getNum.executeQuery();
+            if(check.next()){
+               numAttempt = check.getInt("logAttempt");
+            }
+            getNum.close();
+        }catch(SQLException ex){
+            Logger.getLogger(AccountRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }catch(ClassNotFoundException ex){
+             Logger.getLogger(AccountRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return numAttempt;
+    }
+    
+    public void decreaseLimitByUsername(String username){
+        try{
+            Connection conn = DatabaseService.establishConnection();
+            PreparedStatement lmtcheckupdate = conn.prepareStatement("UPDATE tblaccounts SET logAttempt = logAttempt - 1 WHERE username = ?");
+            lmtcheckupdate.setString(1,username);
+            lmtcheckupdate.executeUpdate();
+            lmtcheckupdate.close();
+        }catch(SQLException ex){
+            Logger.getLogger(AccountRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }catch(ClassNotFoundException ex){
+             Logger.getLogger(AccountRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public boolean checkCredentials(Account acc){
+        boolean isCorrect = false;
+        try{
+            Connection conn = DatabaseService.establishConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM tblaccounts WHERE username = ? AND password = ?");
+            stmt.setString(1, acc.getUsername());
+            stmt.setString(2, acc.getPassword());
+            ResultSet verify = stmt.executeQuery();
+            if(verify.next()){
+               isCorrect = true;
+            }
+        }catch(SQLException ex){
+            Logger.getLogger(AccountRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }catch(ClassNotFoundException ex){
+             Logger.getLogger(AccountRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return isCorrect;
+    }
+    
+    public String[] findUserCredentials(Account acc){
+        String userType = null;
+        String fullName = null;
+        try{
+            Connection conn = DatabaseService.establishConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM tblaccounts WHERE username = ? AND password = ?");
+            stmt.setString(1, acc.getUsername());
+            stmt.setString(2, acc.getPassword());
+            ResultSet verify = stmt.executeQuery();
+            if(verify.next()){
+               userType = verify.getString("userType");
+               fullName = verify.getString("FullName");
+            }
+        }catch(SQLException ex){
+            Logger.getLogger(AccountRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }catch(ClassNotFoundException ex){
+             Logger.getLogger(AccountRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return new String[]{userType,fullName};
+    }
+    
 }

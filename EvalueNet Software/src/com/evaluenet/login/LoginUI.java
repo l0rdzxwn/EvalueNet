@@ -6,10 +6,11 @@ package com.evaluenet.login;
 
 //Essential import classes
 
-import com.evaluenet.login.LoginService;
+import com.evaluenet.services.LoginService;
 import com.evaluenet.admin.Admin;
 import com.evaluenet.hr.HRLANDING;
 import com.evaluenet.it.ITADDACC;
+import com.evaluenet.services.AccountService;
 import com.evaluenet.teacher.TCHLANDING;
 import com.evaluenet.util.UtilityFunctions;
 import java.awt.Insets;
@@ -41,12 +42,6 @@ import io.github.cdimascio.dotenv.Dotenv;
 
 public class LoginUI extends javax.swing.JFrame {
    
-   //-------------------------
-   // VARIABLE INITIALIZATION
-   //-------------------------
-   private Map<String, String> userDatabase = new HashMap<>();
-  
-   
     public LoginUI() {
         initComponents();
         UtilityFunctions.disableCopy(userLP);
@@ -61,6 +56,8 @@ public class LoginUI extends javax.swing.JFrame {
         this.setIconImage(img);
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
     }
+    
+    private final AccountService service = new AccountService();
        
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -166,7 +163,7 @@ public class LoginUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        LoginService.loginAuth(userLP, passLP,this);
+        service.loginAuth(userLP.getText(), passLP.getText(),this);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing

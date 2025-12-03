@@ -8,7 +8,7 @@ import com.evaluenet.admin.SubjectForm;
 import com.evaluenet.admin.tablesf1;
 import com.evaluenet.it.ITADDACC;
 import com.evaluenet.models.Account;
-import com.evaluenet.models.AccountRepository;
+import com.evaluenet.repository.AccountRepository;
 import com.evaluenet.models.Teacher;
 import com.evaluenet.repository.AccountRepository;
 import com.evaluenet.repository.TeacherRepository;
