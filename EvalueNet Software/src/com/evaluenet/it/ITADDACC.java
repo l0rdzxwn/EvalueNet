@@ -44,7 +44,6 @@ public class ITADDACC extends javax.swing.JFrame {
         
         displayIntoTable();
         styleHeader(accTable);
-        
         numTch.setText(String.valueOf(service.getTeacherTotal()));
         numAdm.setText(String.valueOf(service.getAdminTotal()));
         numHR.setText(String.valueOf(service.getHRTotal()));

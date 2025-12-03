@@ -9,6 +9,7 @@ import com.evaluenet.admin.SubjectForm;
 import com.evaluenet.admin.tablesf1;
 import com.evaluenet.login.LoginUI;
 import com.evaluenet.models.Account;
+import com.evaluenet.models.Teacher;
 import com.evaluenet.services.AccountService;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.mysql.cj.jdbc.result.ResultSetMetaData;
@@ -42,14 +43,15 @@ public class ITADDACCFORM extends javax.swing.JFrame {
         lName.setEnabled(false);
         tchName.setEnabled(false);
         tchName.addItem("Select a Teacher: ");
-        ITService.getTeachers();
         displayIntoTable();
+        //insertIntoTeacherCB();
     }
 
     AccountService accServ = new AccountService();
-
+    ITService service = new ITService();
+    DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
+    
     public void displayIntoTable(){
-        ITService service = new ITService();
         List<Account> accounts = service.getAll();
         DefaultTableModel secAssign = (DefaultTableModel) accTable.getModel();
         secAssign.setRowCount(0);
@@ -62,8 +64,16 @@ public class ITADDACCFORM extends javax.swing.JFrame {
             row[2] = acc.getType();
             secAssign.addRow(row);
         }
-        
     }
+    
+    public void insertIntoTeacherCB(){
+        List<Teacher> teacher = service.getTeachers();
+        for(Teacher tch: teacher){
+            tcModel.addElement(tch.getName());
+        } 
+    }
+    
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -183,7 +193,7 @@ public class ITADDACCFORM extends javax.swing.JFrame {
         getContentPane().add(jLabel7);
         jLabel7.setBounds(290, 140, 220, 22);
 
-        tchName.setModel(com.evaluenet.services.ITService.tcModel);
+        tchName.setModel(tcModel);
         getContentPane().add(tchName);
         tchName.setBounds(570, 170, 220, 40);
 
@@ -353,7 +363,6 @@ public class ITADDACCFORM extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonActionPerformed
-        
         String usertype = (String) userType.getSelectedItem();
         if(!userType.equals("Teacher")){
             if(fName.getText().equals("")){
@@ -378,7 +387,7 @@ public class ITADDACCFORM extends javax.swing.JFrame {
             String tcName = (String) tchName.getSelectedItem();
             accServ.createAccount(tcName,uName.getText(),passbox.getText(),usertype);
         }
-            ITService.getItem(accTable); 
+            displayIntoTable();
  
     }//GEN-LAST:event_buttonActionPerformed
 

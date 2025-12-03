@@ -9,7 +9,9 @@ import com.evaluenet.admin.tablesf1;
 import com.evaluenet.it.ITADDACC;
 import com.evaluenet.models.Account;
 import com.evaluenet.models.AccountRepository;
+import com.evaluenet.models.Teacher;
 import com.evaluenet.repository.AccountRepository;
+import com.evaluenet.repository.TeacherRepository;
 import com.mysql.cj.jdbc.result.ResultSetMetaData;
 import io.github.cdimascio.dotenv.Dotenv;
 import java.sql.DriverManager;
@@ -33,14 +35,10 @@ import javax.swing.table.DefaultTableModel;
  * @author lordz
  */
 public class ITService {
-    static Connection conn;
-    static DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
-    AccountRepository accRepo = new AccountRepository();
     
+    private final AccountRepository accRepo = new AccountRepository();
+    private final TeacherRepository tchRepo = new TeacherRepository();
     
-    //==========================
-    // ITADDACC FUNCTIONS
-    //==========================
     public List<Account> getAll(){
         return accRepo.findAll();
     }
@@ -57,29 +55,10 @@ public class ITService {
         return accRepo.countByType("HR");
     }
     
-    public static void getTeachers() {
-        String getTC = "SELECT NAME FROM tchInfo";
-        try {
-            establishConnection();
-            PreparedStatement applySQL = conn.prepareStatement(getTC);
-            ResultSet tcVal = applySQL.executeQuery();
-
-            System.out.println("All Rows:");
-            while(tcVal.next()) {
-
-                String tcName = tcVal.getString("NAME");
-                System.out.println("FullName: " + tcName);
-                tcModel.addElement(tcName);
-            }
-
-            applySQL.executeQuery();
-
-
-        } catch (SQLException ex) {
-            Logger.getLogger(SubjectForm.class.getName()).log(Level.SEVERE, null, ex);
-        }catch(ClassNotFoundException ex){
-             Logger.getLogger(SubjectForm.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    
+    //CONTINUE HERE >>>>>>>>>>>
+    public List<Teacher> getTeachers() {
+        return tchRepo.findAllTeachers();
     }
 
 }
