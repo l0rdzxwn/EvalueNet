@@ -6,7 +6,7 @@ package com.evaluenet.login;
 
 //Essential import classes
 
-import com.evaluenet.services.LoginService;
+
 import com.evaluenet.admin.Admin;
 import com.evaluenet.hr.HRLANDING;
 import com.evaluenet.it.ITADDACC;
@@ -115,11 +115,6 @@ public class LoginUI extends javax.swing.JFrame {
         sampTxt.setFont(new java.awt.Font("Tw Cen MT", 1, 16)); // NOI18N
         sampTxt.setForeground(new java.awt.Color(0, 153, 102));
         sampTxt.setText("<html><u>Forgot Password?</u></html>");
-        sampTxt.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sampTxtMouseClicked(evt);
-            }
-        });
         getContentPane().add(sampTxt);
         sampTxt.setBounds(890, 440, 150, 40);
 
@@ -169,11 +164,7 @@ public class LoginUI extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         UtilityFunctions.closeForm(this);
     }//GEN-LAST:event_formWindowClosing
-   
-    private void sampTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sampTxtMouseClicked
-        
-    }//GEN-LAST:event_sampTxtMouseClicked
-    
+       
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

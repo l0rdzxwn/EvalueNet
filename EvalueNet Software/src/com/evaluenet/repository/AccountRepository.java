@@ -142,25 +142,6 @@ public class AccountRepository {
         }
     }
     
-    public boolean checkCredentials(Account acc){
-        boolean isCorrect = false;
-        try{
-            Connection conn = DatabaseService.establishConnection();
-            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM tblaccounts WHERE username = ? AND password = ?");
-            stmt.setString(1, acc.getUsername());
-            stmt.setString(2, acc.getPassword());
-            ResultSet verify = stmt.executeQuery();
-            if(verify.next()){
-               isCorrect = true;
-            }
-        }catch(SQLException ex){
-            Logger.getLogger(AccountRepository.class.getName()).log(Level.SEVERE, null, ex);
-        }catch(ClassNotFoundException ex){
-             Logger.getLogger(AccountRepository.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return isCorrect;
-    }
-    
     public String[] findUserCredentials(Account acc){
         String userType = null;
         String fullName = null;

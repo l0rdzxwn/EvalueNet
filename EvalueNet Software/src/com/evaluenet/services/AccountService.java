@@ -54,14 +54,13 @@ public class AccountService {
     }
     
     public void loginAuth(String username, String password, JFrame frame){
-        
         Account acc = new Account(username,password);
-        boolean isVerified = accRepo.checkCredentials(acc);
         int userAttempt = accRepo.getAttemptByUsername(username);
         String creds[] = accRepo.findUserCredentials(acc);
+        boolean isVerified = creds != null;
         
-        if(userAttempt > 0){
-            if(isVerified){
+        if(isVerified){
+            if(userAttempt > 0){
                 String userType = creds[0];
                 String name = creds[1];
                 switch(userType){
@@ -91,22 +90,25 @@ public class AccountService {
                     }
                 } 
             }else{
-               accRepo.decreaseLimitByUsername(username);
-               int tempAttempt = accRepo.getAttemptByUsername(username);
-               JOptionPane.showMessageDialog(null, "Incorrect password. "+tempAttempt+" tries left.");
+                showErrorLimitMessage(frame, username);
             }
+        }else if(userAttempt > 0){
+            accRepo.decreaseLimitByUsername(username);
+            int tempAttempt = accRepo.getAttemptByUsername(username);
+            JOptionPane.showMessageDialog(null, "Incorrect username or password. "+tempAttempt+" tries left.");
         }else{
-            JOptionPane.showMessageDialog(null, "Login limit has been reached. Account locked.");
-            int ans = JOptionPane.showConfirmDialog(null, "Do you want to access via Security Question?", "Yes/No Dialog", JOptionPane.YES_NO_OPTION);
-            if(ans == JOptionPane.YES_OPTION) {
-                SecurityQuestionUI lvsq = new SecurityQuestionUI(username);
-                lvsq.setVisible(true);
-                frame.dispose();
-            }
+            showErrorLimitMessage(frame, username);
         }
-        
-        
-        
-        
+    }
+    
+    public void showErrorLimitMessage(JFrame frame, String username){
+        JOptionPane.showMessageDialog(null, "Login limit has been reached. Account locked.");
+            int ans = JOptionPane.showConfirmDialog(null, "Do you want to access via Security Question?", "Yes/No Dialog", JOptionPane.YES_NO_OPTION);
+                if(ans == JOptionPane.YES_OPTION) {
+                    SecurityQuestionUI lvsq = new SecurityQuestionUI(username);
+                    lvsq.setVisible(true);
+                    frame.dispose();
+                }
     }
 }
+
