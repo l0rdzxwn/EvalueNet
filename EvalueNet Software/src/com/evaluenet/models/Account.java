@@ -24,6 +24,8 @@ public class Account {
         this.password = password;
     }
     
+    
+    
     public String getFullname(){ return name; }
     public String getUsername(){ return username; }
     public String getPassword(){ return password; }

@@ -103,6 +103,11 @@ public class LoginUI extends javax.swing.JFrame {
         userLP.setBounds(700, 290, 340, 50);
 
         passLP.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
+        passLP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passLPActionPerformed(evt);
+            }
+        });
         getContentPane().add(passLP);
         passLP.setBounds(700, 390, 340, 50);
 
@@ -164,6 +169,10 @@ public class LoginUI extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         UtilityFunctions.closeForm(this);
     }//GEN-LAST:event_formWindowClosing
+
+    private void passLPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passLPActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passLPActionPerformed
        
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

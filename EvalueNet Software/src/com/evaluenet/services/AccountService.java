@@ -57,48 +57,54 @@ public class AccountService {
         Account acc = new Account(username,password);
         int userAttempt = accRepo.getAttemptByUsername(username);
         String creds[] = accRepo.findUserCredentials(acc);
-        boolean isVerified = creds != null;
+        boolean isVerified = accRepo.checkCredentials(acc);
+        boolean doesExist = accRepo.checkIfUserExist(username);
         
-        if(isVerified){
-            if(userAttempt > 0){
-                String userType = creds[0];
-                String name = creds[1];
-                switch(userType){
-                    case "Admin" -> {
-                        frame.dispose();
-                        Admin a1 = new Admin(name);
-                        accRepo.resetByUsername(username);
-                        a1.setVisible(true);
-                    }
-                    case "Teacher" -> {
-                        frame.dispose();
-                        TCHLANDING tl = new TCHLANDING(name);
-                        accRepo.resetByUsername(username);
-                        tl.setVisible(true);
-                    }
-                    case "IT" -> {
-                        frame.dispose();
-                        ITADDACC i1 = new ITADDACC(name);
-                        accRepo.resetByUsername(username);
-                        i1.setVisible(true);
-                    }
-                    case "HR" -> {
-                        frame.dispose();
-                        HRLANDING h1 = new HRLANDING(name);
-                        accRepo.resetByUsername(username);
-                        h1.setVisible(true);  
-                    }
-                } 
-            }else{
-                showErrorLimitMessage(frame, username);
-            }
-        }else if(userAttempt > 0){
+        if(!doesExist){
+            JOptionPane.showMessageDialog(null, "This user doesn't exist");
+            return;
+        }
+        
+        if(userAttempt <= 0 ){
+            showErrorLimitMessage(frame, username);
+            return;
+        }
+        
+        if(!isVerified){
             accRepo.decreaseLimitByUsername(username);
             int tempAttempt = accRepo.getAttemptByUsername(username);
-            JOptionPane.showMessageDialog(null, "Incorrect username or password. "+tempAttempt+" tries left.");
-        }else{
-            showErrorLimitMessage(frame, username);
+            JOptionPane.showMessageDialog(null, "Incorrect password. "+tempAttempt+" tries left.");
+            return;
         }
+        
+        String userType = creds[0];
+        String name = creds[1];
+        switch(userType){
+            case "Admin" -> {
+                frame.dispose();
+                Admin a1 = new Admin(name);
+                accRepo.resetByUsername(username);
+                a1.setVisible(true);
+            }
+            case "Teacher" -> {
+                frame.dispose();
+                TCHLANDING tl = new TCHLANDING(name);
+                accRepo.resetByUsername(username);
+                tl.setVisible(true);
+            }
+            case "IT" -> {
+                frame.dispose();
+                ITADDACC i1 = new ITADDACC(name);
+                accRepo.resetByUsername(username);
+                i1.setVisible(true);
+            }
+            case "HR" -> {
+                frame.dispose();
+                HRLANDING h1 = new HRLANDING(name);
+                accRepo.resetByUsername(username);
+                h1.setVisible(true);  
+            }
+        }  
     }
     
     public void showErrorLimitMessage(JFrame frame, String username){
