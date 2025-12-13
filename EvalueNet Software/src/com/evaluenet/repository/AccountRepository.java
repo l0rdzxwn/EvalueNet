@@ -54,7 +54,7 @@ public class AccountRepository {
             insertAcc.setString(4,account.getType());
             insertAcc.executeUpdate();
         }catch (SQLException ex) {
-            Logger.getLogger(AccountRepository.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null,ex);
         }catch(ClassNotFoundException ex){
             Logger.getLogger(AccountRepository.class.getName()).log(Level.SEVERE, null, ex);
         }

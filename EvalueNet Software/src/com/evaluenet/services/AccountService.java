@@ -33,13 +33,20 @@ public class AccountService {
         boolean hasSpecialChar = Pattern.compile("[!@#$%^&*(),.?\":{}|<>]").matcher(acc.getPassword()).find();
         boolean hasNumber = Pattern.compile("[0-9]").matcher(acc.getPassword()).find();
         boolean hasUpperCase = Pattern.compile("[A-Z]").matcher(acc.getPassword()).find();
+        boolean alreadyExists = accRepo.checkCredentials(acc);
+        
         
             if(acc.getPassword().length() < 8 || hasSpecialChar == false || hasNumber == false || hasUpperCase == false){
                 JOptionPane.showMessageDialog(null,"Please follow the format");
             }else{
-                accRepo.insertAcc(acc);
-                JOptionPane.showMessageDialog(null,"You have created a new account: " + acc.getFullname());
+                if(alreadyExists){
+                    accRepo.insertAcc(acc);
+                    JOptionPane.showMessageDialog(null,"You have created a new account: " + acc.getFullname());
+                }else{
+                    JOptionPane.showMessageDialog(null,"This username already exists.");
+                }
             }
+        
     }
     // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     
