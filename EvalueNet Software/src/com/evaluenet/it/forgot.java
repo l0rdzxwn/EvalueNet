@@ -18,6 +18,7 @@ import java.sql.PreparedStatement;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -32,6 +33,8 @@ public class forgot extends javax.swing.JFrame {
     public forgot() {
         initComponents();
         displayIntoTable();
+        java.awt.Image img = new ImageIcon(this.getClass().getResource("/com/evaluenet/assets/iconic.png")).getImage();
+        this.setIconImage(img);
     }
     
     public void displayIntoTable(){
