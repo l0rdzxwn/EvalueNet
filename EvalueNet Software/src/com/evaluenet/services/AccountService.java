@@ -11,13 +11,19 @@ import com.evaluenet.login.SecurityQuestionUI;
 import com.evaluenet.models.Account;
 import com.evaluenet.repository.AccountRepository;
 import com.evaluenet.repository.AccountRepository;
+import static com.evaluenet.services.SecurityQuestionServices.conn;
+import static com.evaluenet.services.SecurityQuestionServices.establishConnection;
+import static com.evaluenet.services.SecurityQuestionServices.resetAttempts;
 import com.evaluenet.teacher.TCHLANDING;
+import java.sql.PreparedStatement;
 import java.util.List;
 import java.util.regex.Pattern;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author lordz
@@ -27,7 +33,6 @@ public class AccountService {
     private final AccountRepository accRepo = new AccountRepository();
      
     
-    // ADD DUPLICATE USERNAME HANDLER >>>>>>>>>>>>>
     public void createAccount(String fullname,String username,String password,String usertype){
         Account acc = new Account(fullname, username, password, usertype);
         boolean hasSpecialChar = Pattern.compile("[!@#$%^&*(),.?\":{}|<>]").matcher(acc.getPassword()).find();
@@ -48,7 +53,7 @@ public class AccountService {
             }
         
     }
-    // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    
     
     public void deleteAccount(String username){
         accRepo.removeByUsername(username);
@@ -62,8 +67,9 @@ public class AccountService {
     
     public void loginAuth(String username, String password, JFrame frame){
         Account acc = new Account(username,password);
-        int userAttempt = accRepo.getAttemptByUsername(username);
-        String creds[] = accRepo.findUserCredentials(acc);
+        Account accUser = new Account(username);
+        int userAttempt = accRepo.getAttemptByUsername(username)[0];
+        String creds[] = accRepo.findUserCredentials(accUser);
         boolean isVerified = accRepo.checkCredentials(acc);
         boolean doesExist = accRepo.checkIfUserExist(username);
         
@@ -79,7 +85,7 @@ public class AccountService {
         
         if(!isVerified){
             accRepo.decreaseLimitByUsername(username);
-            int tempAttempt = accRepo.getAttemptByUsername(username);
+            int tempAttempt = accRepo.getAttemptByUsername(username)[0];
             JOptionPane.showMessageDialog(null, "Incorrect password. "+tempAttempt+" tries left.");
             return;
         }
@@ -112,6 +118,54 @@ public class AccountService {
                 h1.setVisible(true);  
             }
         }  
+    }
+    
+    public void SqAuth(String username, String answer, JFrame frame){
+        Account acc = new Account(username);
+        int userAttempt = accRepo.getAttemptByUsername(username)[1];
+        boolean isAnswerCorrect = accRepo.isAnswerValid(username, answer);
+        String[] creds = accRepo.findUserCredentials(acc);
+        if(userAttempt <= 0){
+            JOptionPane.showMessageDialog(null,"Your attempt limit has been reached. You cannot access through Security Question.");
+            return;
+        }
+        
+        if(!isAnswerCorrect){
+            accRepo.decreaseSqLimitByUsername(username);
+            JOptionPane.showMessageDialog(null,"Your answer is incorrect. You have "+userAttempt+" attempts left.");
+            return;
+        }
+        
+        String userType = creds[0];
+        String name = creds[1];
+        switch(userType){
+            case "Admin" -> {
+                frame.dispose();
+                Admin a1 = new Admin(name);
+                accRepo.resetByUsername(username);
+                a1.setVisible(true);
+            }
+            case "Teacher" -> {
+                frame.dispose();
+                TCHLANDING tl = new TCHLANDING(name);
+                accRepo.resetByUsername(username);
+                tl.setVisible(true);
+            }
+            case "IT" -> {
+                frame.dispose();
+                ITADDACC i1 = new ITADDACC(name);
+                accRepo.resetByUsername(username);
+                i1.setVisible(true);
+            }
+            case "HR" -> {
+                frame.dispose();
+                HRLANDING h1 = new HRLANDING(name);
+                accRepo.resetByUsername(username);
+                h1.setVisible(true);  
+            }
+        }
+        
+        
     }
     
     public void showErrorLimitMessage(JFrame frame, String username){

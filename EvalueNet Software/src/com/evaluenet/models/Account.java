@@ -24,6 +24,10 @@ public class Account {
         this.password = password;
     }
     
+    public Account(String username){
+        this.username = username;
+    }
+    
     
     
     public String getFullname(){ return name; }

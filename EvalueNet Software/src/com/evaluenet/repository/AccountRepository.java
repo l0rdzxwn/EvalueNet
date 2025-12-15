@@ -109,15 +109,17 @@ public class AccountRepository {
         return total;
     }
     
-    public int getAttemptByUsername(String username){
+    public int[] getAttemptByUsername(String username){
         int numAttempt = 0;
+        int numAttemptSQ = 0;
         try{
             Connection conn = DatabaseService.establishConnection();
-            PreparedStatement getNum = conn.prepareStatement("SELECT logAttempt FROM tblaccounts WHERE username = ? ");
+            PreparedStatement getNum = conn.prepareStatement("SELECT logAttempt, SQ_Attempts FROM tblaccounts WHERE username = ? ");
             getNum.setObject(1,username);
             ResultSet check = getNum.executeQuery();
             if(check.next()){
                numAttempt = check.getInt("logAttempt");
+               numAttemptSQ = check.getInt("SQ_Attempts");
             }
             getNum.close();
         }catch(SQLException ex){
@@ -125,7 +127,7 @@ public class AccountRepository {
         }catch(ClassNotFoundException ex){
              Logger.getLogger(AccountRepository.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return numAttempt;
+        return new int[]{numAttempt,numAttemptSQ};
     }
     
     public void decreaseLimitByUsername(String username){
@@ -166,9 +168,8 @@ public class AccountRepository {
         String fullName = null;
         try{
             Connection conn = DatabaseService.establishConnection();
-            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM tblaccounts WHERE username = ? AND password = ?");
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM tblaccounts WHERE username = ?");
             stmt.setString(1, acc.getUsername());
-            stmt.setString(2, acc.getPassword());
             ResultSet verify = stmt.executeQuery();
             if(verify.next()){
                userType = verify.getString("userType");
@@ -198,6 +199,39 @@ public class AccountRepository {
              Logger.getLogger(AccountRepository.class.getName()).log(Level.SEVERE, null, ex);
         }
         return doesExist;
+    }
+    
+    public boolean isAnswerValid(String username, String answer){
+        boolean isCorrect = false;
+        try{
+            Connection conn = DatabaseService.establishConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM tblaccounts WHERE username = ? AND answer = ?");
+            stmt.setString(1,username);
+            stmt.setString(2, answer);
+            ResultSet verify = stmt.executeQuery();
+            if(verify.next()){
+                isCorrect = true;
+            }
+        }catch(SQLException ex){
+            Logger.getLogger(AccountRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }catch(ClassNotFoundException ex){
+             Logger.getLogger(AccountRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return isCorrect;
+    }
+    
+    public void decreaseSqLimitByUsername(String username){
+        try{
+            Connection conn = DatabaseService.establishConnection();
+            PreparedStatement lmtcheckupdate = conn.prepareStatement("UPDATE tblaccounts SET SQ_Attempts = SQ_Attempts - 1 WHERE username = ?");
+            lmtcheckupdate.setString(1,username);
+            lmtcheckupdate.executeUpdate();
+            lmtcheckupdate.close();
+        }catch(SQLException ex){
+            Logger.getLogger(AccountRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }catch(ClassNotFoundException ex){
+             Logger.getLogger(AccountRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }
