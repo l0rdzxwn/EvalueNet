@@ -55,10 +55,22 @@ public class ITService {
         return accRepo.countByType("HR");
     }
     
-    
-    //CONTINUE HERE >>>>>>>>>>>
     public List<Teacher> getTeachers() {
         return tchRepo.findAllTeachers();
     }
+    
+    public void saveSQ(String username,String answer, String question){
+        List<Account> account = accRepo.findAll();
+        for(Account acc: account){
+            if(acc.getUsername().equals(username)){
+                if(acc.getQuestion().equals("none")){
+                    accRepo.saveSqDetails(question,answer,acc.getUsername());
+                    JOptionPane.showMessageDialog(null,"Security Question for this account has been set successfully!");
+                }
+            }
+        }
+        
+    }
 
+    
 }

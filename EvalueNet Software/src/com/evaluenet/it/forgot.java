@@ -5,6 +5,9 @@
 package com.evaluenet.it;
 
 import com.evaluenet.login.LoginUI;
+import com.evaluenet.models.Account;
+import com.evaluenet.services.ITService;
+import com.formdev.flatlaf.FlatLightLaf;
 import io.github.cdimascio.dotenv.Dotenv;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -12,8 +15,10 @@ import javax.swing.JOptionPane;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -26,16 +31,27 @@ public class forgot extends javax.swing.JFrame {
      */
     public forgot() {
         initComponents();
-        try {   
-            establishConnection();
-        } catch (SQLException ex) {
-            Logger.getLogger(forgot.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(forgot.class.getName()).log(Level.SEVERE, null, ex);
+        displayIntoTable();
+    }
+    
+    public void displayIntoTable(){
+        List<Account> accounts = service.getAll();
+        DefaultTableModel secAssign = (DefaultTableModel) accTable.getModel();
+        secAssign.setRowCount(0);
+        accTable.setDefaultEditor(Object.class, null);
+        
+        for(Account acc: accounts){
+            Object[] row = new Object[4];
+            row[0] = acc.getFullname();
+            row[1] = acc.getUsername();
+            row[2] = acc.getType();
+            row[3] = acc.getQuestion();
+            secAssign.addRow(row);
         }
     }
-
-    Connection conn;
+    
+    
+    ITService service = new ITService();
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -224,7 +240,9 @@ public class forgot extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        saveSQ();
+        String squestion = (String) chosenSQ.getSelectedItem();
+        service.saveSQ(userField.getText(), ansSQ.getText(), squestion);
+        displayIntoTable();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void ansSQActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ansSQActionPerformed
@@ -256,89 +274,6 @@ public class forgot extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton10ActionPerformed
 
-    
-    
-    public void saveSQ(){
-        try {
-            String User = userField.getText();
-            PreparedStatement getUN = conn.prepareStatement("SELECT username,SEC_QUES FROM tblaccounts WHERE username = ?");
-            getUN.setString(1, User);
-            ResultSet findUN = getUN.executeQuery();
-            
-        if(findUN.next()){
-            
-            String UN = findUN.getString("username");
-            String SQVal = findUN.getString("SEC_QUES");
-            
-            if(!SQVal.equals("none")){
-            
-            int sqVal = chosenSQ.getSelectedIndex();
-            String ansVal = ansSQ.getText();
-            
-            if(UN.equals("")){
-                JOptionPane.showMessageDialog(null,"Please enter your username.");
-            }else if(sqVal == 0){
-                JOptionPane.showMessageDialog(null,"Please selecct a security question");
-            }else if(ansVal.equals("")){
-                JOptionPane.showMessageDialog(null,"Please enter your answer");
-            }else{
-                try {
-                    PreparedStatement findUser = conn.prepareStatement("SELECT username,SEC_QUES FROM tblaccounts WHERE username = ?");
-                    findUser.setString(1,UN);
-                    ResultSet userName = findUser.executeQuery();
-                    if(userName.next()){
-                        String unVal = userName.getString("username");
-                       
-                        
-                        
-                        String CSQ =(String) chosenSQ.getSelectedItem();
-                        PreparedStatement insVal = conn.prepareStatement("UPDATE tblaccounts SET SEC_QUES = ?, ANS_SQ = ? WHERE username = ?");
-                        insVal.setString(1,CSQ);
-                        insVal.setString(2,ansVal);
-                        insVal.setString(3,unVal);
-                        insVal.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Security Question set successfully");
-                        LoginUI log = new LoginUI();
-                        log.setVisible(true);
-                        this.setVisible(false);
-                        
-                        
-                        }else{
-                        JOptionPane.showMessageDialog(null,"Username is invalid");
-                    }
-                } catch (SQLException ex) {
-                    Logger.getLogger(forgot.class.getName()).log(Level.SEVERE, null, ex);
-                    JOptionPane.showMessageDialog(this,"Error inserting value: "+ex.getMessage());
-                }
-                
-            }
-}
-        
-        }else{
-            JOptionPane.showMessageDialog(null, "Username not found.");
-        }
-            
-        }
-        
-        catch (SQLException ex) {
-            Logger.getLogger(forgot.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-            
-    }
-    
-    //Connecting Java to SQL server
-    public void establishConnection() throws SQLException, ClassNotFoundException{
-        
-            Class.forName("com.mysql.cj.jdbc.Driver"); //Driver Connection
-            Dotenv dotenv = Dotenv.configure().directory("./com/evaluenet/database").filename("dbaccess.env").load();
-            conn = DriverManager.getConnection(dotenv.get("DB_URL"),dotenv.get("DB_USER"),dotenv.get("DB_PASSWORD")); //Database Connection
-        //Checks connection
-            if(conn != null){
-                System.out.println("Connection successfully");
-            }
-    }
-    
     /**
      * @param args the command line arguments
      */
@@ -365,7 +300,8 @@ public class forgot extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(forgot.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        System.setProperty("flatlaf.useNativeLibrary", "false");
+        FlatLightLaf.setup();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

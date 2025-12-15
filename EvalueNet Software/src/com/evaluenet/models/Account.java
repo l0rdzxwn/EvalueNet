@@ -11,6 +11,21 @@ public class Account {
     private String username;
     private String password;
     private String userType;
+    private String squestion;
+    private String sqanswer;
+    private int loginLimit;
+    private int sqLimit;
+    
+    public Account(String name, String username, String password, int loginLimit, String squestion, String sqanswer, int sqLimit, String userType){
+        this.name = name;
+        this.username = username;
+        this.password = password;
+        this.loginLimit = loginLimit;
+        this.squestion = squestion;
+        this.sqanswer = sqanswer;
+        this.sqLimit = sqLimit;
+        this.userType = userType;
+    }
     
     public Account(String name, String username, String password, String userType){
         this.name = name;
@@ -33,6 +48,10 @@ public class Account {
     public String getFullname(){ return name; }
     public String getUsername(){ return username; }
     public String getPassword(){ return password; }
+    public String getQuestion(){ return squestion; }
+    public String getAnswer(){ return sqanswer; }
     public String getType(){ return userType; }
+    public int getLoginAttempt(){ return loginLimit; }
+    public int getSqAttempt(){ return sqLimit; }
     
 }

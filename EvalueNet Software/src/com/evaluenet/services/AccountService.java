@@ -11,9 +11,6 @@ import com.evaluenet.login.SecurityQuestionUI;
 import com.evaluenet.models.Account;
 import com.evaluenet.repository.AccountRepository;
 import com.evaluenet.repository.AccountRepository;
-import static com.evaluenet.services.SecurityQuestionServices.conn;
-import static com.evaluenet.services.SecurityQuestionServices.establishConnection;
-import static com.evaluenet.services.SecurityQuestionServices.resetAttempts;
 import com.evaluenet.teacher.TCHLANDING;
 import java.sql.PreparedStatement;
 import java.util.List;
@@ -53,7 +50,6 @@ public class AccountService {
             }
         
     }
-    
     
     public void deleteAccount(String username){
         accRepo.removeByUsername(username);
@@ -164,9 +160,9 @@ public class AccountService {
                 h1.setVisible(true);  
             }
         }
-        
-        
     }
+    
+    
     
     public void showErrorLimitMessage(JFrame frame, String username){
         JOptionPane.showMessageDialog(null, "Login limit has been reached. Account locked.");

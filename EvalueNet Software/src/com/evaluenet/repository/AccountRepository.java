@@ -24,13 +24,17 @@ public class AccountRepository {
         List<Account> accounts = new ArrayList<>();
         try{
             Connection conn = DatabaseService.establishConnection();
-            PreparedStatement stmt = conn.prepareStatement("SELECT FullName, username, password, userType FROM tblaccounts");
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM tblaccounts");
             ResultSet getAll = stmt.executeQuery();
             while(getAll.next()){
                 Account acc = new Account(
                     getAll.getString("FullName"),
                     getAll.getString("username"),
                     getAll.getString("password"),
+                    getAll.getInt("logAttempt"),
+                    getAll.getString("SEC_QUES"),
+                    getAll.getString("ANS_SQ"),
+                    getAll.getInt("SQ_Attempts"),
                     getAll.getString("userType")
                 );  
                 accounts.add(acc);
@@ -205,7 +209,7 @@ public class AccountRepository {
         boolean isCorrect = false;
         try{
             Connection conn = DatabaseService.establishConnection();
-            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM tblaccounts WHERE username = ? AND answer = ?");
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM tblaccounts WHERE username = ? AND ANS_SQ = ?");
             stmt.setString(1,username);
             stmt.setString(2, answer);
             ResultSet verify = stmt.executeQuery();
@@ -227,6 +231,21 @@ public class AccountRepository {
             lmtcheckupdate.setString(1,username);
             lmtcheckupdate.executeUpdate();
             lmtcheckupdate.close();
+        }catch(SQLException ex){
+            Logger.getLogger(AccountRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }catch(ClassNotFoundException ex){
+             Logger.getLogger(AccountRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void saveSqDetails(String question, String answer, String username){
+        try{
+            Connection conn = DatabaseService.establishConnection();
+            PreparedStatement updateStmt = conn.prepareStatement("UPDATE tblaccounts SET SEC_QUES = ? , ANS_SQ = ? WHERE username = ?");
+            updateStmt.setString(1, question);
+            updateStmt.setString(2, answer);
+            updateStmt.setString(3, username);
+            updateStmt.executeUpdate();
         }catch(SQLException ex){
             Logger.getLogger(AccountRepository.class.getName()).log(Level.SEVERE, null, ex);
         }catch(ClassNotFoundException ex){
