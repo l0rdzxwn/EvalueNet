@@ -26,6 +26,7 @@ import javax.swing.JTable;
 import javax.swing.table.JTableHeader;
 import io.github.cdimascio.dotenv.Dotenv;
 import java.util.List;
+import java.util.Set;
 
 
 public class ITADDACC extends javax.swing.JFrame {
@@ -57,7 +58,7 @@ public class ITADDACC extends javax.swing.JFrame {
     
     public void displayIntoTable(){
         
-        List<Account> accounts = service.getAll();
+        Set<Account> accounts = service.getAll();
         DefaultTableModel secAssign = (DefaultTableModel) accTable.getModel();
         secAssign.setRowCount(0);
         accTable.setDefaultEditor(Object.class, null);

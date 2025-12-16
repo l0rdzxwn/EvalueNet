@@ -20,6 +20,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
@@ -39,7 +40,7 @@ public class ITService {
     private final AccountRepository accRepo = new AccountRepository();
     private final TeacherRepository tchRepo = new TeacherRepository();
     
-    public List<Account> getAll(){
+    public Set<Account> getAll(){
         return accRepo.findAll();
     }
     
@@ -60,9 +61,9 @@ public class ITService {
     }
     
     public void saveSQ(String username,String answer, String question){
-        List<Account> account = accRepo.findAll();
+        Set<Account> account = accRepo.findAll();
         for(Account acc: account){
-            if(acc.getUsername().equals(username)){
+            if(acc.getUsername().contains(username)){
                 if(acc.getQuestion().equals("none")){
                     accRepo.saveSqDetails(question,answer,acc.getUsername());
                     JOptionPane.showMessageDialog(null,"Security Question for this account has been set successfully!");

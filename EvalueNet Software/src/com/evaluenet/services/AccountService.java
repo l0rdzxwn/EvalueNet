@@ -41,7 +41,7 @@ public class AccountService {
             if(acc.getPassword().length() < 8 || hasSpecialChar == false || hasNumber == false || hasUpperCase == false){
                 JOptionPane.showMessageDialog(null,"Please follow the format");
             }else{
-                if(alreadyExists){
+                if(!alreadyExists){
                     accRepo.insertAcc(acc);
                     JOptionPane.showMessageDialog(null,"You have created a new account: " + acc.getFullname());
                 }else{

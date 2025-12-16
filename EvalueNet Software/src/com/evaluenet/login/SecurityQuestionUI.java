@@ -34,6 +34,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
@@ -163,9 +164,9 @@ public final class SecurityQuestionUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
      
     public void getQuestion(){
-        List<Account> acc = itServ.getAll();
+        Set<Account> acc = itServ.getAll();
         for(Account account: acc){
-            if(account.getUsername().equals(userName.getText())){
+            if(account.getUsername().contains(userName.getText())){
                 sqLabel.setText(account.getQuestion());
             }
         }

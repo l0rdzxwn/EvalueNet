@@ -23,6 +23,7 @@ import java.util.logging.Logger;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Pattern;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -52,7 +53,7 @@ public class ITADDACCFORM extends javax.swing.JFrame {
     DefaultComboBoxModel<String> tcModel = new DefaultComboBoxModel<>();
     
     public void displayIntoTable(){
-        List<Account> accounts = service.getAll();
+        Set<Account> accounts = service.getAll();
         DefaultTableModel secAssign = (DefaultTableModel) accTable.getModel();
         secAssign.setRowCount(0);
         accTable.setDefaultEditor(Object.class, null);

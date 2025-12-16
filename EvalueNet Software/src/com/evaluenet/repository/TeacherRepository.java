@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.evaluenet.repository;
-
 import com.evaluenet.models.Teacher;
 import com.evaluenet.services.DatabaseService;
 import java.util.List;
@@ -20,11 +19,11 @@ import java.util.logging.Logger;
  * @author lordz
  */
 public class TeacherRepository {
-    
+    Connection conn = DatabaseService.establishConnection();
     public List<Teacher> findAllTeachers(){
         List<Teacher> teacher = new ArrayList<>();
         try{
-            Connection conn = DatabaseService.establishConnection();
+            
             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM tchInfo");
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){
@@ -39,8 +38,6 @@ public class TeacherRepository {
             }
             stmt.close();
         }catch(SQLException ex){
-            Logger.getLogger(TeacherRepository.class.getName()).log(Level.SEVERE, null, ex);
-        }catch(ClassNotFoundException ex){
             Logger.getLogger(TeacherRepository.class.getName()).log(Level.SEVERE, null, ex);
         }
         return teacher;

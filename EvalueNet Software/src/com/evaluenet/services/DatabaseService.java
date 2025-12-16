@@ -13,13 +13,20 @@ import java.sql.Connection;
  * @author lordz
  */
 public class DatabaseService {
-    public static Connection establishConnection() throws SQLException, ClassNotFoundException{
-        Class.forName("com.mysql.cj.jdbc.Driver"); //Driver Connection
-        Dotenv dotenv = Dotenv.configure().directory("./com/evaluenet/database").filename("dbaccess.env").load();
-        Connection conn = DriverManager.getConnection(dotenv.get("DB_URL"),dotenv.get("DB_USER"),dotenv.get("DB_PASSWORD")); //Database Connection
-        //Checks connection
-        if(conn != null){
-            System.out.println("Connection successfully");
+    public static Connection establishConnection(){
+        Connection conn = null;
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver"); //Driver Connection
+            Dotenv dotenv = Dotenv.configure().directory("./com/evaluenet/database").filename("dbaccess.env").load();
+            conn = DriverManager.getConnection(dotenv.get("DB_URL"),dotenv.get("DB_USER"),dotenv.get("DB_PASSWORD")); //Database Connection
+            //Checks connection
+            if(conn != null){
+                System.out.println("Connection successfully");
+            }
+        }catch(SQLException ex){
+            System.out.println(ex.getMessage());
+        }catch(ClassNotFoundException ex){
+            System.out.println(ex.getMessage());
         }
         return conn;
 }

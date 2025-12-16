@@ -16,6 +16,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -38,7 +39,7 @@ public class forgot extends javax.swing.JFrame {
     }
     
     public void displayIntoTable(){
-        List<Account> accounts = service.getAll();
+        Set<Account> accounts = service.getAll();
         DefaultTableModel secAssign = (DefaultTableModel) accTable.getModel();
         secAssign.setRowCount(0);
         accTable.setDefaultEditor(Object.class, null);
