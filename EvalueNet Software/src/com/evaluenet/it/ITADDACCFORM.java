@@ -46,6 +46,7 @@ public class ITADDACCFORM extends javax.swing.JFrame {
         tchName.addItem("Select a Teacher: ");
         displayIntoTable();
         insertIntoTeacherCB();
+        this.setResizable(false);
     }
 
     AccountService accServ = new AccountService();

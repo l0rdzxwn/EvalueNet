@@ -42,7 +42,7 @@ public class ITADDACC extends javax.swing.JFrame {
         //------------
         java.awt.Image img = new ImageIcon(this.getClass().getResource("/com/evaluenet/assets/iconic.png")).getImage();
         this.setIconImage(img);
-        
+        this.setResizable(false);
         displayIntoTable();
         styleHeader(accTable);
         numTch.setText(String.valueOf(service.getTeacherTotal()));

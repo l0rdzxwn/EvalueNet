@@ -53,6 +53,7 @@ public final class SecurityQuestionUI extends javax.swing.JFrame {
         java.awt.Image img = new ImageIcon(this.getClass().getResource("/com/evaluenet/assets/iconic.png")).getImage();
         this.setIconImage(img);
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        this.setResizable(false);
     }
 
     private Map<String, String> userDatabase = new HashMap<>();

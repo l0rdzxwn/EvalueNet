@@ -36,6 +36,7 @@ public class forgot extends javax.swing.JFrame {
         displayIntoTable();
         java.awt.Image img = new ImageIcon(this.getClass().getResource("/com/evaluenet/assets/iconic.png")).getImage();
         this.setIconImage(img);
+        this.setResizable(false);
     }
     
     public void displayIntoTable(){
