@@ -48,7 +48,7 @@ public class LoginUI extends javax.swing.JFrame {
         UtilityFunctions.disableCopy(passLP);
         UtilityFunctions.disablePaste(userLP);
         UtilityFunctions.disablePaste(passLP);       
-       
+        this.setResizable(false);
         //------------
         // ICON SETUP 
         //------------
