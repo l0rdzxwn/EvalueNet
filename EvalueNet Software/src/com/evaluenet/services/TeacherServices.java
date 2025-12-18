@@ -4,6 +4,7 @@
  */
 package com.evaluenet.services;
 
+import com.evaluenet.models.Teacher;
 import com.evaluenet.repository.TeacherRepository;
 import java.util.List;
 
@@ -17,5 +18,9 @@ public class TeacherServices {
     
     public List<Integer> fetchAnalytics(){
         return tchRepo.fetchAnalytics();
+    }
+    
+    public List<Teacher> fetchTeachers(){
+        return tchRepo.fetchAllTeachers();
     }
 }

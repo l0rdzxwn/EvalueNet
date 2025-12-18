@@ -4,10 +4,12 @@
  */
 package com.evaluenet.hr;
 import com.evaluenet.login.LoginUI;
+import com.evaluenet.models.Teacher;
 import com.evaluenet.services.TeacherServices;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.util.*;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 
 /**
@@ -23,6 +25,7 @@ public class HRLANDING extends javax.swing.JFrame {
         initComponents();
         hrName.setText(name);
         displayAnalytics();
+        displayToTable();
     }  
     
     TeacherServices service = new TeacherServices();
@@ -32,6 +35,21 @@ public class HRLANDING extends javax.swing.JFrame {
         numTch.setText(analytics.get(0).toString());
         numActiveStatus.setText(analytics.get(1).toString());
         numInactiveStatus.setText(analytics.get(2).toString());
+    }
+    
+    private void displayToTable(){
+        List<Teacher> teachers = service.fetchTeachers();
+        DefaultTableModel tchModel = (DefaultTableModel) tchTable.getModel();
+        tchModel.setRowCount(0);
+        for(Teacher teacher: teachers){
+            List<Object> row = new ArrayList<>();
+                row.add(teacher.getName());
+                row.add(teacher.getSex());
+                row.add(teacher.getAge());
+                row.add(teacher.getEmpStatus());
+                row.add(teacher.getActiveStatus());
+            tchModel.addRow(row.toArray());
+        }
     }
     
     @SuppressWarnings("unchecked")
@@ -257,7 +275,7 @@ public class HRLANDING extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
+        displayToTable();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
