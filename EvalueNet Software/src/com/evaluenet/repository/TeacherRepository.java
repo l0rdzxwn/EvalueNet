@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,7 +21,7 @@ import java.util.logging.Logger;
  */
 public class TeacherRepository {
     Connection conn = DatabaseService.establishConnection();
-    public List<Teacher> findAllTeachers(){
+    public List<Teacher> fetchAllTeachers(){
         List<Teacher> teacher = new ArrayList<>();
         try{
             
@@ -43,5 +44,23 @@ public class TeacherRepository {
         return teacher;
     }
     
+    public List<Integer> fetchAnalytics(){
+    List<Integer> analytics = new ArrayList<>();
+    try{
+        PreparedStatement countStmt = conn.prepareStatement("SELECT COUNT(NAME) AS totalTeacher, \n" +
+"                                                               COUNT(CASE WHEN Status = 'Active' THEN 1 END) AS activeStatus,  \n" +
+"                                                               COUNT(CASE WHEN Status = 'Inactive' THEN 1 END) AS inactiveStatus\n" +
+"                                                               FROM tchinfo;");
+                
+        ResultSet getCount = countStmt.executeQuery();
+        if(getCount.next()){
+            Collections.addAll(analytics,getCount.getInt("totalTeacher"),getCount.getInt("activeStatus"),getCount.getInt("inactiveStatus"));
+        }
+        countStmt.close();
+    }catch(SQLException ex){
+        Logger.getLogger(TeacherRepository.class.getName()).log(Level.INFO,null,ex);
+    }
     
+    return analytics;
+    }
 }

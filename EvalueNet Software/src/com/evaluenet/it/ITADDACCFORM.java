@@ -121,12 +121,12 @@ public class ITADDACCFORM extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
         jLabel1.setText("LAST NAME:");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(570, 230, 140, 22);
 
-        jLabel6.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
         jLabel6.setText("PASSWORD:");
         getContentPane().add(jLabel6);
         jLabel6.setBounds(290, 410, 140, 16);
@@ -175,22 +175,22 @@ public class ITADDACCFORM extends javax.swing.JFrame {
         getContentPane().add(fName);
         fName.setBounds(290, 260, 250, 40);
 
-        jLabel2.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
         jLabel2.setText("FOR TEACHER ACCOUNT: ");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(570, 140, 220, 22);
 
-        jLabel5.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
         jLabel5.setText("USERNAME:");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(290, 310, 140, 22);
+        jLabel5.setBounds(290, 320, 140, 22);
 
-        jLabel3.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
         jLabel3.setText(" FIRST NAME:");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(290, 230, 140, 22);
 
-        jLabel7.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
         jLabel7.setText("SELECT ACCOUNT TYPE: ");
         getContentPane().add(jLabel7);
         jLabel7.setBounds(290, 140, 220, 22);
@@ -281,7 +281,7 @@ public class ITADDACCFORM extends javax.swing.JFrame {
         jPanel4.setBounds(0, 0, 270, 800);
 
         jLabel4.setFont(new java.awt.Font("Tw Cen MT", 1, 36)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(28, 68, 45));
+        jLabel4.setForeground(new java.awt.Color(0, 108, 72));
         jLabel4.setText("ADD ACCOUNT");
         getContentPane().add(jLabel4);
         jLabel4.setBounds(410, 90, 270, 40);
@@ -317,7 +317,7 @@ public class ITADDACCFORM extends javax.swing.JFrame {
         getContentPane().add(button1);
         button1.setBounds(960, 230, 170, 40);
 
-        jLabel17.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
+        jLabel17.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
         jLabel17.setText("USERNAME:");
         getContentPane().add(jLabel17);
         jLabel17.setBounds(860, 140, 140, 22);
@@ -327,7 +327,7 @@ public class ITADDACCFORM extends javax.swing.JFrame {
         uNameRem.setBounds(860, 170, 380, 40);
 
         jLabel20.setFont(new java.awt.Font("Tw Cen MT", 1, 36)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(28, 68, 45));
+        jLabel20.setForeground(new java.awt.Color(0, 108, 72));
         jLabel20.setText("REMOVE ACCOUNT");
         getContentPane().add(jLabel20);
         jLabel20.setBounds(900, 90, 320, 40);
@@ -349,13 +349,13 @@ public class ITADDACCFORM extends javax.swing.JFrame {
         getContentPane().add(button2);
         button2.setBounds(960, 490, 170, 40);
 
-        jLabel18.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
+        jLabel18.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
         jLabel18.setText("USERNAME:");
         getContentPane().add(jLabel18);
         jLabel18.setBounds(850, 410, 140, 22);
 
         jLabel21.setFont(new java.awt.Font("Tw Cen MT", 1, 36)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(28, 68, 45));
+        jLabel21.setForeground(new java.awt.Color(0, 108, 72));
         jLabel21.setText("RESET LIMITS");
         getContentPane().add(jLabel21);
         jLabel21.setBounds(950, 350, 200, 40);

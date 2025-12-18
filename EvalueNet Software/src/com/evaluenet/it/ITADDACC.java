@@ -5,27 +5,14 @@
 package com.evaluenet.it;
 import com.evaluenet.services.ITService;
 import com.formdev.flatlaf.FlatLightLaf;
-import com.evaluenet.admin.tablesf1;
 import com.evaluenet.login.LoginUI;
 import com.evaluenet.models.Account;
-import com.mysql.cj.jdbc.result.ResultSetMetaData;
 import java.awt.Font;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import java.sql.Connection;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.JTableHeader;
-import io.github.cdimascio.dotenv.Dotenv;
-import java.util.List;
 import java.util.Set;
 
 
@@ -92,7 +79,6 @@ public class ITADDACC extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         numTch = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         accTable = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
@@ -221,22 +207,6 @@ public class ITADDACC extends javax.swing.JFrame {
         getContentPane().add(jPanel3);
         jPanel3.setBounds(330, 120, 270, 100);
 
-        jPanel5.setBackground(new java.awt.Color(0, 153, 102));
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 220, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 430, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(jPanel5);
-        jPanel5.setBounds(330, 240, 220, 430);
-
         accTable.setAutoCreateRowSorter(true);
         accTable.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
         accTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -255,7 +225,7 @@ public class ITADDACC extends javax.swing.JFrame {
         jScrollPane1.setViewportView(accTable);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(580, 240, 650, 430);
+        jScrollPane1.setBounds(330, 240, 890, 500);
 
         jPanel6.setBackground(new java.awt.Color(0, 153, 102));
 
@@ -405,7 +375,6 @@ public class ITADDACC extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;

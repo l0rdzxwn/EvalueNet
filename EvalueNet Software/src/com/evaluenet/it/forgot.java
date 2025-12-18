@@ -72,8 +72,6 @@ public class forgot extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        manageAccBtn = new javax.swing.JButton();
-        sqBtn = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
         itVal = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -81,6 +79,7 @@ public class forgot extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jButton11 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         accTable = new javax.swing.JTable();
 
@@ -90,12 +89,12 @@ public class forgot extends javax.swing.JFrame {
         getContentPane().add(jLabel10);
         jLabel10.setBounds(80, -30, 260, 0);
 
-        jLabel3.setFont(new java.awt.Font("Tw Cen MT", 0, 24)); // NOI18N
-        jLabel3.setText("Answer");
+        jLabel3.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
+        jLabel3.setText("ANSWER");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(300, 420, 100, 16);
+        jLabel3.setBounds(300, 416, 100, 30);
 
-        jButton2.setBackground(new java.awt.Color(0, 108, 72));
+        jButton2.setBackground(new java.awt.Color(0, 153, 102));
         jButton2.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("SAVE");
@@ -106,7 +105,7 @@ public class forgot extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(370, 500, 150, 40);
+        jButton2.setBounds(370, 510, 150, 40);
 
         ansSQ.setFont(new java.awt.Font("Tw Cen MT", 0, 12)); // NOI18N
         ansSQ.addActionListener(new java.awt.event.ActionListener() {
@@ -117,8 +116,8 @@ public class forgot extends javax.swing.JFrame {
         getContentPane().add(ansSQ);
         ansSQ.setBounds(300, 450, 300, 40);
 
-        jLabel4.setFont(new java.awt.Font("Tw Cen MT", 0, 24)); // NOI18N
-        jLabel4.setText("Security Question");
+        jLabel4.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
+        jLabel4.setText("SECURITY QUESTION");
         getContentPane().add(jLabel4);
         jLabel4.setBounds(300, 330, 210, 20);
 
@@ -129,14 +128,14 @@ public class forgot extends javax.swing.JFrame {
             }
         });
         getContentPane().add(chosenSQ);
-        chosenSQ.setBounds(300, 370, 300, 40);
+        chosenSQ.setBounds(300, 360, 300, 40);
 
-        jLabel15.setFont(new java.awt.Font("Tw Cen MT", 0, 24)); // NOI18N
-        jLabel15.setText("Username");
+        jLabel15.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
+        jLabel15.setText("USERNAME");
         getContentPane().add(jLabel15);
-        jLabel15.setBounds(300, 240, 120, 27);
+        jLabel15.setBounds(300, 240, 120, 21);
         getContentPane().add(userField);
-        userField.setBounds(300, 280, 300, 40);
+        userField.setBounds(300, 270, 300, 40);
 
         jPanel1.setBackground(new java.awt.Color(0, 108, 72));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -151,30 +150,6 @@ public class forgot extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(0, 153, 102));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        manageAccBtn.setBackground(new java.awt.Color(0, 153, 102));
-        manageAccBtn.setFont(new java.awt.Font("Poppins", 0, 18)); // NOI18N
-        manageAccBtn.setForeground(new java.awt.Color(255, 255, 255));
-        manageAccBtn.setText("MANAGE ACCOUNTS");
-        manageAccBtn.setBorder(null);
-        manageAccBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                manageAccBtnActionPerformed(evt);
-            }
-        });
-        jPanel4.add(manageAccBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 192, 270, 90));
-
-        sqBtn.setBackground(new java.awt.Color(0, 153, 102));
-        sqBtn.setFont(new java.awt.Font("Poppins", 0, 18)); // NOI18N
-        sqBtn.setForeground(new java.awt.Color(255, 255, 255));
-        sqBtn.setText("ADD SECURITY QUESTION");
-        sqBtn.setBorder(null);
-        sqBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sqBtnActionPerformed(evt);
-            }
-        });
-        jPanel4.add(sqBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 270, 90));
 
         jButton10.setBackground(new java.awt.Color(0, 108, 72));
         jButton10.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
@@ -217,6 +192,18 @@ public class forgot extends javax.swing.JFrame {
         jLabel9.setText("IT Administrator");
         jPanel4.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 220, 30));
 
+        jButton11.setBackground(new java.awt.Color(0, 108, 72));
+        jButton11.setFont(new java.awt.Font("Poppins Medium", 1, 18)); // NOI18N
+        jButton11.setForeground(new java.awt.Color(255, 255, 255));
+        jButton11.setText("GO BACK");
+        jButton11.setBorder(null);
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 630, 250, 56));
+
         getContentPane().add(jPanel4);
         jPanel4.setBounds(0, 0, 270, 800);
 
@@ -238,7 +225,7 @@ public class forgot extends javax.swing.JFrame {
         jScrollPane1.setViewportView(accTable);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(620, 210, 630, 410);
+        jScrollPane1.setBounds(620, 90, 640, 690);
 
         pack();
         setLocationRelativeTo(null);
@@ -258,18 +245,6 @@ public class forgot extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_chosenSQActionPerformed
 
-    private void manageAccBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageAccBtnActionPerformed
-        ITADDACCFORM iaf = new ITADDACCFORM(itVal.getText());
-        this.dispose();
-        iaf.setVisible(true);
-    }//GEN-LAST:event_manageAccBtnActionPerformed
-
-    private void sqBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sqBtnActionPerformed
-        forgot f1 = new forgot();
-        f1.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_sqBtnActionPerformed
-
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         LoginUI l1 = new LoginUI();
         int answer = JOptionPane.showConfirmDialog(this, "Are you sure you want to log out?","Logout Confirmation", JOptionPane.YES_NO_OPTION);
@@ -278,6 +253,12 @@ public class forgot extends javax.swing.JFrame {
             l1.setVisible(true);
         }
     }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        ITADDACC iac = new ITADDACC(itVal.getText());
+        iac.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton11ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -321,6 +302,7 @@ public class forgot extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> chosenSQ;
     private javax.swing.JLabel itVal;
     private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel15;
@@ -335,8 +317,6 @@ public class forgot extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton manageAccBtn;
-    private javax.swing.JButton sqBtn;
     private javax.swing.JTextField userField;
     // End of variables declaration//GEN-END:variables
 }

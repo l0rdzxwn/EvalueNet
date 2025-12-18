@@ -57,7 +57,7 @@ public class ITService {
     }
     
     public List<Teacher> getTeachers() {
-        return tchRepo.findAllTeachers();
+        return tchRepo.fetchAllTeachers();
     }
     
     public void saveSQ(String username,String answer, String question){
