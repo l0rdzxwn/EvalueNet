@@ -24,7 +24,6 @@ public class TeacherRepository {
     public List<Teacher> fetchAllTeachers(){
         List<Teacher> teacher = new ArrayList<>();
         try{
-            
             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM tchInfo");
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){
@@ -76,6 +75,20 @@ public class TeacherRepository {
         }catch(SQLException ex){
             Logger.getLogger(TeacherRepository.class.getName()).log(Level.SEVERE,null,ex);
         }
+    }
+    
+    public void updateTeacherStatus(Teacher teacher){
+        try{
+            PreparedStatement updateStmt = conn.prepareStatement("UPDATE tchInfo SET EMP_STATUS = ? , STATUS = ? WHERE NAME = ?");
+            updateStmt.setString(1,teacher.getEmpStatus());
+            updateStmt.setString(2,teacher.getActiveStatus());
+            updateStmt.setString(3,teacher.getName());
+            updateStmt.executeUpdate();
+        }catch(SQLException ex){
+            Logger.getLogger(TeacherRepository.class.getName()).log(Level.SEVERE,null,ex);
+        }
+        
+        
     }
     
     

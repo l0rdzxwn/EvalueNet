@@ -45,4 +45,31 @@ public class TeacherServices {
         tchRepo.insertTeacher(teacher);
         JOptionPane.showMessageDialog(null,"New teacher had been added successfully!");
     }
+    
+    public void updateStatus(String name, String empStatus, String activeStatus){
+        List<Teacher> teachers = tchRepo.fetchAllTeachers();
+        String defaultEmpStatus = null;
+        String defaultActiveStatus = null;
+        for(Teacher teacher: teachers ){
+            if(teacher.getName().equals(name)){
+                defaultEmpStatus = teacher.getEmpStatus();
+                defaultActiveStatus = teacher.getActiveStatus();
+                break;
+            }
+        }
+        
+        if(empStatus.equals("Default")){
+            empStatus = defaultEmpStatus;
+        }
+        
+        if(activeStatus.equals("Default")){
+            activeStatus = defaultActiveStatus;
+        }
+        
+        Teacher teacher = new Teacher(name,empStatus,activeStatus);
+        tchRepo.updateTeacherStatus(teacher);
+        JOptionPane.showMessageDialog(null,"Updated Teacher's status successfully!");
+        
+        
+    }
 }

@@ -9,6 +9,7 @@ import com.evaluenet.services.TeacherServices;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -24,6 +25,7 @@ public class HRMANAGETCH extends javax.swing.JFrame {
     public HRMANAGETCH() {
         initComponents();
         displayToTable();
+        insertDataToCB();
     }
     
     private void displayToTable(){
@@ -38,6 +40,14 @@ public class HRMANAGETCH extends javax.swing.JFrame {
                 row.add(teacher.getEmpStatus());
                 row.add(teacher.getActiveStatus());
             tchModel.addRow(row.toArray());
+        }
+    }
+    
+    private void insertDataToCB(){
+        List<Teacher> teachers = service.fetchTeachers();
+        DefaultComboBoxModel tchModel = (DefaultComboBoxModel) teacherCB.getModel();
+        for(Teacher teacher: teachers){
+            tchModel.addElement(teacher.getName());
         }
     }
     
@@ -73,12 +83,12 @@ public class HRMANAGETCH extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        nameField1 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
-        eStatusCB1 = new javax.swing.JComboBox<>();
+        teacherCB = new javax.swing.JComboBox<>();
         jLabel18 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         statusCB1 = new javax.swing.JComboBox<>();
+        eStatusCB2 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -214,7 +224,6 @@ public class HRMANAGETCH extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
         jLabel14.setText("TEACHER'S NAME:");
         getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 150, 150, 30));
-        getContentPane().add(nameField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 180, 470, 40));
 
         jButton2.setBackground(new java.awt.Color(0, 153, 102));
         jButton2.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
@@ -227,8 +236,8 @@ public class HRMANAGETCH extends javax.swing.JFrame {
         });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 480, 150, 40));
 
-        eStatusCB1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Default","Part-time", "Casual", "Full-time" }));
-        getContentPane().add(eStatusCB1, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 260, 230, 40));
+        teacherCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"Select teacher's name: "}));
+        getContentPane().add(teacherCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 180, 470, 40));
 
         jLabel18.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
         jLabel18.setText("EMPLOYMENT STATUS: ");
@@ -241,11 +250,24 @@ public class HRMANAGETCH extends javax.swing.JFrame {
         statusCB1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Default","Active", "Inactive" }));
         getContentPane().add(statusCB1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 260, 210, 40));
 
+        eStatusCB2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Default","Part-time", "Casual", "Full-time" }));
+        getContentPane().add(eStatusCB2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 260, 230, 40));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      
+        String name = (String) teacherCB.getSelectedItem();
+        String empStatus =(String) eStatusCB2.getSelectedItem();
+        String activeStatus =(String) statusCB1.getSelectedItem();
+        
+        if(teacherCB.getSelectedIndex() == 0){
+            JOptionPane.showMessageDialog(null,"Please choose a proper teacher name");
+            return;
+        }
+        
+        service.updateStatus(name,empStatus,activeStatus);
+        displayToTable();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
@@ -286,7 +308,7 @@ public class HRMANAGETCH extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField ageField;
     private javax.swing.JComboBox<String> eStatusCB;
-    private javax.swing.JComboBox<String> eStatusCB1;
+    private javax.swing.JComboBox<String> eStatusCB2;
     private javax.swing.JLabel hrName;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton11;
@@ -312,10 +334,10 @@ public class HRMANAGETCH extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nameField;
-    private javax.swing.JTextField nameField1;
     private javax.swing.JComboBox<String> sexCB;
     private javax.swing.JComboBox<String> statusCB;
     private javax.swing.JComboBox<String> statusCB1;
     private javax.swing.JTable tchTable;
+    private javax.swing.JComboBox<String> teacherCB;
     // End of variables declaration//GEN-END:variables
 }

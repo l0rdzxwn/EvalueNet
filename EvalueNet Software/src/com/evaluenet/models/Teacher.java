@@ -23,6 +23,12 @@ public class Teacher {
         this.activeStatus = activeStatus;
     }
     
+    public Teacher(String name, String employmentStatus, String activeStatus){
+        this.name = name;
+        this.employmentStatus = employmentStatus;
+        this.activeStatus = activeStatus;
+    }
+    
     //Getters & Setters
     public String getName(){ return name; };
     public String getSex(){ return sex; };
