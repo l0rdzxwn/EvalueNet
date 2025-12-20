@@ -92,7 +92,15 @@ public class HRLANDING extends javax.swing.JFrame {
             new String [] {
                 "Name", "Sex", "Age", "Employment Status", "Status"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tchTable);
 
         getContentPane().add(jScrollPane1);
@@ -276,6 +284,7 @@ public class HRLANDING extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         displayToTable();
+        JOptionPane.showMessageDialog(null,"Records had been successfully refreshed.");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed

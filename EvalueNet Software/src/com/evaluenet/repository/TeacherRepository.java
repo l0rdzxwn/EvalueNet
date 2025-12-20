@@ -31,7 +31,7 @@ public class TeacherRepository {
                 Teacher tch = new Teacher(
                      rs.getString("NAME"),
                      rs.getString("SEX"),
-                     rs.getInt("AGE"),
+                     rs.getString("AGE"),
                      rs.getString("EMP_STATUS"),
                      rs.getString("STATUS")
                 );
@@ -62,6 +62,20 @@ public class TeacherRepository {
     }
     
     return analytics;
+    }
+    
+    public void insertTeacher(Teacher teacher){
+        try{
+            PreparedStatement insertStmt = conn.prepareStatement("INSERT INTO tchInfo(NAME,SEX,AGE,EMP_STATUS,STATUS) VALUES(?,?,?,?,?)");
+            insertStmt.setString(1,teacher.getName());
+            insertStmt.setString(2,teacher.getSex());
+            insertStmt.setString(3,teacher.getAge());
+            insertStmt.setString(4,teacher.getEmpStatus());
+            insertStmt.setString(5,teacher.getActiveStatus());
+            insertStmt.executeUpdate();
+        }catch(SQLException ex){
+            Logger.getLogger(TeacherRepository.class.getName()).log(Level.SEVERE,null,ex);
+        }
     }
     
     

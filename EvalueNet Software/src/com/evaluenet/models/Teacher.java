@@ -11,11 +11,11 @@ package com.evaluenet.models;
 public class Teacher {
     private String name;
     private String sex;
-    private int age;
+    private String age;
     private String employmentStatus;
     private String activeStatus;
     
-    public Teacher(String name, String sex, int age, String employmentStatus, String activeStatus){
+    public Teacher(String name, String sex, String age, String employmentStatus, String activeStatus){
         this.name = name;
         this.sex = sex;
         this.age = age;
@@ -26,7 +26,7 @@ public class Teacher {
     //Getters & Setters
     public String getName(){ return name; };
     public String getSex(){ return sex; };
-    public int getAge(){ return age; };
+    public String getAge(){ return age; };
     public String getEmpStatus(){ return employmentStatus; };
     public String getActiveStatus(){ return activeStatus; };
 }
