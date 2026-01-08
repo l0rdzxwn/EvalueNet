@@ -116,7 +116,7 @@ public class AccountService {
         }  
     }
     
-    public void SqAuth(String username, String answer, JFrame frame){
+    public void sqAuth(String username, String answer, JFrame frame){
         Account acc = new Account(username);
         int userAttempt = accRepo.getAttemptByUsername(username)[1];
         boolean isAnswerCorrect = accRepo.isAnswerValid(username, answer);

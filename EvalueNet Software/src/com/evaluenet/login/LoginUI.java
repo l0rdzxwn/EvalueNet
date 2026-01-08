@@ -44,11 +44,11 @@ public class LoginUI extends javax.swing.JFrame {
    
     public LoginUI() {
         initComponents();
+        
         UtilityFunctions.disableCopy(userLP);
         UtilityFunctions.disableCopy(passLP);
         UtilityFunctions.disablePaste(userLP);
-        UtilityFunctions.disablePaste(passLP);       
-        this.setResizable(false);
+        UtilityFunctions.disablePaste(passLP);     
         //------------
         // ICON SETUP 
         //------------
@@ -62,26 +62,31 @@ public class LoginUI extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        loginPanel = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         userLP = new javax.swing.JTextField();
-        passLP = new javax.swing.JPasswordField();
-        jLabel5 = new javax.swing.JLabel();
-        sampTxt = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        jPanel6 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        sampTxt1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        passLP = new javax.swing.JTextField();
+        jPanel8 = new javax.swing.JPanel();
+        loginBtn = new javax.swing.JButton();
 
         jPanel4.setBackground(new java.awt.Color(242, 239, 238));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(204, 255, 204));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setSize(new java.awt.Dimension(0, 0));
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -89,90 +94,122 @@ public class LoginUI extends javax.swing.JFrame {
                 formWindowClosing(evt);
             }
         });
-        getContentPane().setLayout(null);
 
-        jLabel3.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 153, 102));
-        jLabel3.setText("C.O.D.E.S");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(1180, 770, 110, 30);
+        jPanel5.setBackground(new java.awt.Color(240, 248, 245));
+        jPanel5.setLayout(new java.awt.GridBagLayout());
 
-        userLP.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
-        userLP.setToolTipText("");
-        getContentPane().add(userLP);
-        userLP.setBounds(700, 290, 340, 50);
+        loginPanel.setBackground(new java.awt.Color(255, 255, 255));
+        loginPanel.setName(""); // NOI18N
+        loginPanel.setPreferredSize(new java.awt.Dimension(280, 450));
+        loginPanel.setLayout(new javax.swing.BoxLayout(loginPanel, javax.swing.BoxLayout.Y_AXIS));
 
-        passLP.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
-        passLP.addActionListener(new java.awt.event.ActionListener() {
+        jPanel9.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel9.setMaximumSize(new java.awt.Dimension(455, 50));
+        jPanel9.setPreferredSize(new java.awt.Dimension(100, 60));
+        loginPanel.add(jPanel9);
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/evaluenet/assets/iconic.png"))); // NOI18N
+        jLabel6.setAlignmentX(0.5F);
+        loginPanel.add(jLabel6);
+
+        jLabel1.setBackground(new java.awt.Color(27, 94, 32));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 153, 102));
+        jLabel1.setText("Welcome");
+        jLabel1.setAlignmentX(0.5F);
+        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel1.setMaximumSize(new java.awt.Dimension(156, 32));
+        loginPanel.add(jLabel1);
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(200, 200, 200));
+        jLabel5.setText("Sign in to your account");
+        jLabel5.setAlignmentX(0.5F);
+        loginPanel.add(jLabel5);
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setMaximumSize(new java.awt.Dimension(455, 30));
+        jPanel2.setPreferredSize(new java.awt.Dimension(100, 50));
+        loginPanel.add(jPanel2);
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setText("Username");
+        jLabel3.setAlignmentX(0.5F);
+        jLabel3.setMaximumSize(new java.awt.Dimension(205, 25));
+        loginPanel.add(jLabel3);
+
+        userLP.setAutoscrolls(false);
+        userLP.setMargin(new java.awt.Insets(2, 10, 2, 10));
+        userLP.setMaximumSize(new java.awt.Dimension(205, 25));
+        userLP.setPreferredSize(new java.awt.Dimension(23, 30));
+        loginPanel.add(userLP);
+
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel6.setMaximumSize(new java.awt.Dimension(455, 10));
+        jPanel6.setPreferredSize(new java.awt.Dimension(100, 10));
+        loginPanel.add(jPanel6);
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setText("Password");
+        jLabel4.setAlignmentX(0.5F);
+        jLabel4.setMaximumSize(new java.awt.Dimension(205, 25));
+        loginPanel.add(jLabel4);
+
+        passLP.setToolTipText("");
+        passLP.setMaximumSize(new java.awt.Dimension(205, 25));
+        loginPanel.add(passLP);
+
+        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel8.setMaximumSize(new java.awt.Dimension(455, 30));
+        jPanel8.setPreferredSize(new java.awt.Dimension(100, 50));
+        loginPanel.add(jPanel8);
+
+        loginBtn.setBackground(new java.awt.Color(0, 153, 102));
+        loginBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        loginBtn.setForeground(new java.awt.Color(255, 255, 255));
+        loginBtn.setText("LOGIN");
+        loginBtn.setAlignmentX(0.5F);
+        loginBtn.setMaximumSize(new java.awt.Dimension(205, 43));
+        loginBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passLPActionPerformed(evt);
+                loginBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(passLP);
-        passLP.setBounds(700, 390, 340, 50);
+        loginPanel.add(loginBtn);
 
-        jLabel5.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 153, 102));
-        jLabel5.setText("Password");
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(700, 360, 80, 21);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        jPanel5.add(loginPanel, gridBagConstraints);
 
-        sampTxt.setFont(new java.awt.Font("Tw Cen MT", 1, 16)); // NOI18N
-        sampTxt.setForeground(new java.awt.Color(0, 153, 102));
-        sampTxt.setText("<html><u>Forgot Password?</u></html>");
-        getContentPane().add(sampTxt);
-        sampTxt.setBounds(890, 440, 150, 40);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 894, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
-        jButton2.setBackground(new java.awt.Color(0, 153, 102));
-        jButton2.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("LOGIN");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton2);
-        jButton2.setBounds(800, 490, 150, 50);
-
-        jLabel4.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 153, 102));
-        jLabel4.setText("Username");
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(700, 260, 100, 16);
-
-        jLabel6.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 153, 102));
-        jLabel6.setText("EvalueNet V1.1");
-        getContentPane().add(jLabel6);
-        jLabel6.setBounds(1040, 770, 130, 30);
-
-        sampTxt1.setFont(new java.awt.Font("Tw Cen MT", 1, 42)); // NOI18N
-        sampTxt1.setText("EvalueNet");
-        getContentPane().add(sampTxt1);
-        sampTxt1.setBounds(770, 170, 210, 40);
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(0, 0, 1300, 0);
-
-        jPanel2.setBackground(new java.awt.Color(0, 153, 102));
-        getContentPane().add(jPanel2);
-        jPanel2.setBounds(0, 0, 530, 840);
-
-        setSize(new java.awt.Dimension(1294, 808));
+        setSize(new java.awt.Dimension(916, 608));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        service.loginAuth(userLP.getText(), passLP.getText(),this);
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         UtilityFunctions.closeForm(this);
     }//GEN-LAST:event_formWindowClosing
 
-    private void passLPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passLPActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_passLPActionPerformed
+    private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
+        service.loginAuth(userLP.getText(), passLP.getText(), this);
+    }//GEN-LAST:event_loginBtnActionPerformed
        
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -208,7 +245,7 @@ public class LoginUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -218,9 +255,13 @@ public class LoginUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPasswordField passLP;
-    public javax.swing.JLabel sampTxt;
-    public javax.swing.JLabel sampTxt1;
-    public javax.swing.JTextField userLP;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
+    private javax.swing.JButton loginBtn;
+    private javax.swing.JPanel loginPanel;
+    private javax.swing.JTextField passLP;
+    private javax.swing.JTextField userLP;
     // End of variables declaration//GEN-END:variables
 }
