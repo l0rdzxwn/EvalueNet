@@ -62,13 +62,6 @@ public class forgot extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel10 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        ansSQ = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        chosenSQ = new javax.swing.JComboBox<>();
-        jLabel15 = new javax.swing.JLabel();
-        userField = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -80,6 +73,14 @@ public class forgot extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jButton11 = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        ansSQ = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        chosenSQ = new javax.swing.JComboBox<>();
+        jLabel15 = new javax.swing.JLabel();
+        userField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         accTable = new javax.swing.JTable();
 
@@ -88,54 +89,6 @@ public class forgot extends javax.swing.JFrame {
         getContentPane().setLayout(null);
         getContentPane().add(jLabel10);
         jLabel10.setBounds(80, -30, 260, 0);
-
-        jLabel3.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
-        jLabel3.setText("ANSWER");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(300, 416, 100, 30);
-
-        jButton2.setBackground(new java.awt.Color(0, 153, 102));
-        jButton2.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("SAVE");
-        jButton2.setBorder(null);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton2);
-        jButton2.setBounds(370, 510, 150, 40);
-
-        ansSQ.setFont(new java.awt.Font("Tw Cen MT", 0, 12)); // NOI18N
-        ansSQ.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ansSQActionPerformed(evt);
-            }
-        });
-        getContentPane().add(ansSQ);
-        ansSQ.setBounds(300, 450, 300, 40);
-
-        jLabel4.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
-        jLabel4.setText("SECURITY QUESTION");
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(300, 330, 210, 20);
-
-        chosenSQ.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose a question", "What's the name of your first pet?", "What is your favorite food?", "Who is your favorite person?" }));
-        chosenSQ.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chosenSQActionPerformed(evt);
-            }
-        });
-        getContentPane().add(chosenSQ);
-        chosenSQ.setBounds(300, 360, 300, 40);
-
-        jLabel15.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
-        jLabel15.setText("USERNAME");
-        getContentPane().add(jLabel15);
-        jLabel15.setBounds(300, 240, 120, 21);
-        getContentPane().add(userField);
-        userField.setBounds(300, 270, 300, 40);
 
         jPanel1.setBackground(new java.awt.Color(0, 108, 72));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -207,6 +160,49 @@ public class forgot extends javax.swing.JFrame {
         getContentPane().add(jPanel4);
         jPanel4.setBounds(0, 0, 270, 800);
 
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel3.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
+        jLabel3.setText("ANSWER");
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 40, 100, 30));
+
+        jButton2.setBackground(new java.awt.Color(0, 153, 102));
+        jButton2.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("SAVE");
+        jButton2.setBorder(null);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 80, 150, 40));
+
+        ansSQ.setFont(new java.awt.Font("Tw Cen MT", 0, 12)); // NOI18N
+        ansSQ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ansSQActionPerformed(evt);
+            }
+        });
+        jPanel3.add(ansSQ, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 80, 220, 40));
+
+        jLabel4.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
+        jLabel4.setText("SECURITY QUESTION");
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 210, 20));
+
+        chosenSQ.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose a question", "What's the name of your first pet?", "What is your favorite food?", "Who is your favorite person?" }));
+        chosenSQ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chosenSQActionPerformed(evt);
+            }
+        });
+        jPanel3.add(chosenSQ, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, 300, 40));
+
+        jLabel15.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
+        jLabel15.setText("USERNAME");
+        jPanel3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 90, 20));
+        jPanel3.add(userField, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 220, 40));
+
         accTable.setAutoCreateRowSorter(true);
         accTable.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
         accTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -224,8 +220,10 @@ public class forgot extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(accTable);
 
-        getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(620, 90, 640, 690);
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 920, 450));
+
+        getContentPane().add(jPanel3);
+        jPanel3.setBounds(300, 110, 950, 610);
 
         pack();
         setLocationRelativeTo(null);
@@ -315,6 +313,7 @@ public class forgot extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField userField;

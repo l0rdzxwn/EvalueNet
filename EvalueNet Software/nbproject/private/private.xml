@@ -13,17 +13,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/JAVA_Projects/EvalueNet/EvalueNet%20Software/src/com/evaluenet/it/ITADDACCFORM.java</file>
-            <file>file:/C:/JAVA_Projects/EvalueNet/EvalueNet%20Software/src/com/evaluenet/hr/HRLANDING.java</file>
-            <file>file:/C:/JAVA_Projects/EvalueNet/EvalueNet%20Software/src/com/evaluenet/repository/TeacherRepository.java</file>
+            <file>file:/C:/JAVA_Projects/EvalueNet/EvalueNet%20Software/src/com/evaluenet/it/ITDashboard.java</file>
+            <file>file:/C:/JAVA_Projects/EvalueNet/EvalueNet%20Software/src/com/evaluenet/login/LoginUI.java</file>
+            <file>file:/C:/JAVA_Projects/EvalueNet/EvalueNet%20Software/src/com/evaluenet/login/SecurityQuestionUI.java</file>
             <file>file:/C:/JAVA_Projects/EvalueNet/EvalueNet%20Software/src/com/evaluenet/services/AccountService.java</file>
-            <file>file:/C:/JAVA_Projects/EvalueNet/EvalueNet%20Software/src/com/evaluenet/services/ITService.java</file>
             <file>file:/C:/JAVA_Projects/EvalueNet/EvalueNet%20Software/src/com/evaluenet/it/forgot.java</file>
-            <file>file:/C:/JAVA_Projects/EvalueNet/EvalueNet%20Software/src/com/evaluenet/repository/AccountRepository.java</file>
-            <file>file:/C:/JAVA_Projects/EvalueNet/EvalueNet%20Software/src/com/evaluenet/models/Account.java</file>
-            <file>file:/C:/JAVA_Projects/EvalueNet/EvalueNet%20Software/src/com/evaluenet/models/Teacher.java</file>
-            <file>file:/C:/JAVA_Projects/EvalueNet/EvalueNet%20Software/src/com/evaluenet/hr/HRMANAGETCH.java</file>
-            <file>file:/C:/JAVA_Projects/EvalueNet/EvalueNet%20Software/src/com/evaluenet/services/TeacherServices.java</file>
-            <file>file:/C:/JAVA_Projects/EvalueNet/EvalueNet%20Software/src/com/evaluenet/services/DatabaseService.java</file>
             <file>file:/C:/JAVA_Projects/EvalueNet/EvalueNet%20Software/src/com/evaluenet/it/ITADDACC.java</file>
         </group>
     </open-files>

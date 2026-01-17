@@ -117,6 +117,7 @@ public class ITADDACCFORM extends javax.swing.JFrame {
         button2 = new javax.swing.JButton();
         jLabel18 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -360,6 +361,11 @@ public class ITADDACCFORM extends javax.swing.JFrame {
         getContentPane().add(jLabel21);
         jLabel21.setBounds(950, 350, 200, 40);
 
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(jPanel3);
+        jPanel3.setBounds(1150, 270, 90, 90);
+
         setSize(new java.awt.Dimension(1294, 810));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -533,6 +539,7 @@ public class ITADDACCFORM extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField lName;
